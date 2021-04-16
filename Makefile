@@ -7,3 +7,6 @@ start_development:
 
 test: install
 	rspec .
+
+lint:
+	rubocop --fix .
