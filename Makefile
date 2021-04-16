@@ -10,3 +10,6 @@ test: install
 
 lint:
 	rubocop --fix .
+
+migrate:
+	bin/rails db:migrate
