@@ -2,7 +2,7 @@ install:
 	bundle install
 	yarn install
 
-start_development:
+start_development: install
 	bin/rails server
 
 test: install
