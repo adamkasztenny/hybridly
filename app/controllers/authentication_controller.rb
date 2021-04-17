@@ -1,7 +1,7 @@
-class AuthController < ApplicationController
+class AuthenticationController < ApplicationController
   def callback
-    auth_info = request.env['omniauth.auth']
-    email = auth_info['extra']['raw_info'][:name]
+    omniauth_info = request.env['omniauth.auth']
+    email = omniauth_info['extra']['raw_info'][:name]
 
     user = validate_user_exists(email)
     if user.nil?
@@ -23,7 +23,7 @@ class AuthController < ApplicationController
     user = User.find_by(email: email)
     if user.nil?
       Rails.logger.error "User with email #{email} not found in database"
-      redirect_to '/auth/failure'
+      redirect_to '/authentication/failure'
       return
     end
 
