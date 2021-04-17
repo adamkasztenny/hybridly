@@ -4,7 +4,7 @@
   <div>
     <%= form.label :date %><br>
     <%= form.date_field :date%>
-    <% @reservation.errors.full_messages_for(:date).each do |message| %>
+    <% @reservation.errors.full_messages.each do |message| %>
       <div><%= message %></div>
     <% end %>
   </div>
