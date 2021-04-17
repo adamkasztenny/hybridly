@@ -29,6 +29,8 @@ gem 'jbuilder', '~> 2.7'
 gem 'omniauth-auth0', '~> 2.5'
 gem 'omniauth-rails_csrf_protection', '~> 0.1'
 
+gem "rolify"
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
