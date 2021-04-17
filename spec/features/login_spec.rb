@@ -1,30 +1,32 @@
 require 'rails_helper'
 
 describe "Logging in", type: :feature do
-  let(:email) { 'user@example.com' }
+  let(:valid_email) { 'user@example.com' }
 
   before :each do
-    User.create!(email: email)
+    User.create!(email: valid_email)
   end
 
   it "authenticates the user" do
-    OmniAuth.config.mock_auth[:auth0] = { 'extra' => { 'raw_info' => { :name => email } } }
+    authenticate(valid_email)
 
     visit '/'
 
     click_button 'Login'
 
-    expect(page).to have_content "Welcome #{email}!"
+    expect(page).to have_content "Welcome #{valid_email}!"
   end
 
   it "shows a failure page if the user does not exist" do
-    OmniAuth.config.mock_auth[:auth0] = { 'extra' => { 'raw_info' => { :name => "does-not-exist@example.com" } } }
+    non_existent_email = "does-not-exist@example.com"
+    authenticate(non_existent_email)
 
     visit '/'
 
     click_button 'Login'
 
-    expect(page).not_to have_content "Welcome #{email}!"
+    expect(page).not_to have_content "Welcome #{valid_email}!"
+    expect(page).not_to have_content "Welcome #{non_existent_email}!"
     expect(page).to have_content "Login failed"
   end
 end

@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe AuthenticationController do
   describe "when the user does not exist in the database" do
     it "they should be redirected to the authentication failure page" do
-      OmniAuth.config.mock_auth['extra'] = { 'raw_info' => { :name => "does-not-exist@example.com" } }
-      request.env['omniauth.auth'] = OmniAuth.config.mock_auth
+      authenticate("does-not-exist@example.com")
+      request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:auth0]
 
       post :callback
 
@@ -17,8 +17,8 @@ RSpec.describe AuthenticationController do
       email = "does-exist@example.com"
       User.create(email: email)
 
-      OmniAuth.config.mock_auth['extra'] = { 'raw_info' => { :name => email } }
-      request.env['omniauth.auth'] = OmniAuth.config.mock_auth
+      authenticate(email)
+      request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:auth0]
 
       post :callback
 
