@@ -1,2 +1,4 @@
 <h1>Welcome <%= @user["email"] %>!</h1>
 
+<%= button_to 'Reserve time in the office', new_reservations_path, method: :get %>
+

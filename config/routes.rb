@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   get '/authentication/failure' => 'authentication#failure'
 
   get '/dashboard' => 'dashboard#show'
+
+  resource :reservations
 end
