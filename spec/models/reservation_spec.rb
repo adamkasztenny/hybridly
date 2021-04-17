@@ -20,4 +20,11 @@ RSpec.describe Reservation, type: :model do
 
     expect(reservation).not_to be_valid
   end
+
+  it "does not allow the user to book the same date twice" do
+    Reservation.create!(date: Date.new(2022, 1, 1), user: user)
+    reservation = Reservation.new(date: Date.new(2022, 1, 1), user: user)
+
+    expect(reservation).not_to be_valid
+  end
 end
