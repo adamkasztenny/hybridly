@@ -27,4 +27,21 @@ describe "Reserving a spot in the office", type: :feature do
     expect(page).not_to have_content "Reservation for 2022-01-01 successful!"
     expect(page).to have_content "Date can't be blank"
   end
+
+  it "does not allow the user to reserve the same date twice" do
+    pending
+
+    click_button 'Reserve time in the office'
+
+    fill_in 'reservation_date', :with => '2022-01-01'
+    click_on "Create Reservation"
+
+    click_button 'Reserve time in the office'
+
+    fill_in 'reservation_date', :with => '2022-01-01'
+    click_on "Create Reservation"
+
+    expect(page).not_to have_content "Reservation for 2022-01-01 successful!"
+    expect(page).to have_content "2022-01-01 already reserved!"
+  end
 end
