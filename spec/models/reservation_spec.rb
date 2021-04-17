@@ -13,12 +13,14 @@ RSpec.describe Reservation, type: :model do
     reservation = Reservation.new(user: user)
 
     expect(reservation).not_to be_valid
+    expect(reservation.errors.full_messages).to eq(["Date can't be blank"])
   end
 
   it "must be associated with a user" do
     reservation = Reservation.new(date: Date.new(2022, 1, 1))
 
     expect(reservation).not_to be_valid
+    expect(reservation.errors.full_messages).to eq(["User must exist"])
   end
 
   it "does not allow the user to book the same date twice" do
@@ -26,5 +28,6 @@ RSpec.describe Reservation, type: :model do
     reservation = Reservation.new(date: Date.new(2022, 1, 1), user: user)
 
     expect(reservation).not_to be_valid
+    expect(reservation.errors.full_messages).to eq(["User has already reserved 2022-01-01"])
   end
 end
