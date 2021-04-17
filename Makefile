@@ -14,5 +14,5 @@ lint:
 migrate:
 	bin/rails db:migrate
 
-seed:
+seed: migrate
 	rake db:seed
