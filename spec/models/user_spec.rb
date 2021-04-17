@@ -26,4 +26,16 @@ RSpec.describe User, type: :model do
     second_user = User.new(email: "hybridly@example.com")
     expect(second_user).not_to be_valid
   end
+
+  it "should be a regular employee user by default" do
+    user = User.create!(email: "hybridly@example.com")
+
+    expect(user.has_role?(:employee)).to be true
+  end
+
+  it "should not be an admin user by default" do
+    user = User.create!(email: "hybridly@example.com")
+
+    expect(user.has_role?(:admin)).to be false
+  end
 end
