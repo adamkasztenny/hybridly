@@ -17,14 +17,6 @@ describe "Dashboard", type: :feature do
     expect(page).to have_content "January 2022"
     expect(page).to have_content "2022-01-01"
     expect(page).to have_content "2022-01-31"
-
-    expect(page).to have_content "Mon"
-    expect(page).to have_content "Tue"
-    expect(page).to have_content "Wed"
-    expect(page).to have_content "Thu"
-    expect(page).to have_content "Fri"
-    expect(page).to have_content "Sat"
-    expect(page).to have_content "Sun"
   end
 
   it "displays the days of the week" do
