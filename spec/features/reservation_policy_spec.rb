@@ -12,24 +12,20 @@ describe "Setting a reservation policy", type: :feature do
     end
 
     it "allows the admin to set a limit on the number of employees who can be in the office" do
-      pending
-
-      click_button 'Edit reservation policy'
+      click_button 'Update reservation policy'
       expect(page).to have_content "Update Reservation Policy"
 
-      fill_in 'reservation_policy_office_limit', :with => '2'
-      click_on "Edit Reservation Policy"
+      fill_in 'reservation_policy_office_limit', :with => 2
+      click_on "Update reservation policy"
 
-      expect(page).to have_content "Reservation policy updated!"
+      expect(page).to have_content "Policy updated to permit 2 people in the office"
     end
 
     it "displays an error message if the limit is blank" do
-      pending
+      click_button 'Update reservation policy'
+      click_on "Update reservation policy"
 
-      click_button 'Edit reservation policy'
-      click_on "Edit Reservation Policy"
-
-      expect(page).not_to have_content "Reservation policy updated!"
+      expect(page).not_to have_content "Policy updated"
       expect(page).to have_content "Office limit can't be blank"
     end
   end
@@ -44,7 +40,7 @@ describe "Setting a reservation policy", type: :feature do
     end
 
     it 'the edit button is not visible' do
-      expect(page).not_to have_button("Edit reservation policy")
+      expect(page).not_to have_button("Update reservation policy")
     end
   end
 end
