@@ -41,4 +41,12 @@ RSpec.describe ReservationPolicy, type: :model do
     expect(reservation_policy).not_to be_valid
     expect(reservation_policy.errors.full_messages).to eq(["User is not an admin"])
   end
+
+  it "exposes the current policy in effect" do
+    expect(ReservationPolicy.current).to be nil
+
+    reservation_policy = ReservationPolicy.create!(office_limit: 100, user: admin_user)
+
+    expect(ReservationPolicy.current).to eq(reservation_policy)
+  end
 end
