@@ -4,6 +4,10 @@ class ReservationPolicy < ApplicationRecord
 
   validate :user_must_be_an_admin
 
+  def self.current
+    ReservationPolicy.order(:created_at).last
+  end
+
   private
 
   def user_must_be_an_admin
