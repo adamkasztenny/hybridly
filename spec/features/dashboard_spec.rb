@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe "Dashboard", type: :feature do
   let!(:user) { create(:user) }
+  let!(:reservation_policy) { create(:reservation_policy, office_limit: 2) }
 
   before do
     Timecop.freeze(Time.parse('2022-01-01'))
@@ -32,7 +33,6 @@ describe "Dashboard", type: :feature do
   end
 
   it "displays how many people are in the office on a given day" do
-    create(:reservation_policy, office_limit: 2)
     create(:reservation, user: user)
     create(:reservation, user: create(:user, email: 'hybridly-other@example.com'))
     create(:reservation, date: Date.parse('2022-01-15'), user: user)
@@ -41,5 +41,13 @@ describe "Dashboard", type: :feature do
 
     expect(page).to have_content "2022-01-01\n2 people in the office"
     expect(page).to have_content "2022-01-15\n1 person in the office"
+  end
+
+  it "displays how many people are allowed to be in the office" do
+    pending
+
+    login_as(user.email)
+
+    expect(page).to have_content "A total of 2 people are allowed in the office"
   end
 end
