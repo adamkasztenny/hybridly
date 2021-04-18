@@ -4,7 +4,7 @@ RSpec.describe ReservationsController do
   let(:user) { User.create!(email: "hybridly@example.com") }
 
   before do
-    session[:user] = user.as_json
+    session[:user_id] = user.id
   end
 
   it 'includes Secured' do

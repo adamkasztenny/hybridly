@@ -11,13 +11,13 @@ RSpec.describe AuthenticationController do
       expect(response).to redirect_to('/authentication/failure')
     end
 
-    it "their user information should not be stored in a session" do
+    it "their user id should not be stored in a session" do
       authenticate("does-not-exist@example.com")
       request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:auth0]
 
       post :callback
 
-      expect(session[:user]).to be nil
+      expect(session[:user_id]).to be nil
     end
   end
 
@@ -34,7 +34,7 @@ RSpec.describe AuthenticationController do
       expect(response).to redirect_to('/dashboard')
     end
 
-    it "their user information should be stored in a session" do
+    it "their user id should be stored in a session" do
       email = "does-exist@example.com"
       User.create!(email: email)
 
@@ -43,8 +43,7 @@ RSpec.describe AuthenticationController do
 
       post :callback
 
-      expect(session[:user]).not_to be nil
-      expect(session[:user][:email]).to eq(email)
+      expect(session[:user_id]).not_to be nil
     end
   end
 end

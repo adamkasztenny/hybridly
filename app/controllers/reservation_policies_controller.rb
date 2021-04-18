@@ -7,7 +7,7 @@ class ReservationPoliciesController < ApplicationController
 
   def create
     @reservation_policy = ReservationPolicy.new(reservation_policy_parameters)
-    @reservation_policy.user = User.find(session[:user]["id"])
+    @reservation_policy.user = User.find(session[:user_id])
 
     if @reservation_policy.save
       flash.notice = "Policy updated to permit #{@reservation_policy.office_limit} people in the office"
