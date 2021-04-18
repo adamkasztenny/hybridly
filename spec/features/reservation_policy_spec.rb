@@ -2,13 +2,11 @@ require 'rails_helper'
 
 describe "Setting a reservation policy", type: :feature do
   let!(:admin_user) { create(:admin_user) }
+  let!(:regular_user) { create(:user) }
 
   context 'as an admin' do
     before :each do
-      authenticate(admin_user.email)
-
-      visit '/'
-      click_button 'Login'
+      login_as(admin_user.email)
     end
 
     it "allows the admin to set a limit on the number of employees who can be in the office" do
@@ -32,11 +30,7 @@ describe "Setting a reservation policy", type: :feature do
 
   context 'as a regular employee user' do
     before :each do
-      regular_user = create(:user)
-      authenticate(regular_user.email)
-
-      visit '/'
-      click_button 'Login'
+      login_as(regular_user.email)
     end
 
     it 'the edit button is not visible' do
