@@ -15,7 +15,7 @@
 
   <% reservations_per_day.each do |_, count| %>
     <div>
-      <%= format_reservation_count(count) %>
+      <%= link_to format_reservation_count(count), "#{reservations_path}/#{date}" %>
     </div>
   <% end %>
 <% end %>
