@@ -7,7 +7,7 @@ class ReservationsController < ApplicationController
 
   def create
     @reservation = Reservation.new(reservation_parameters)
-    @reservation.user = User.new(session[:user])
+    @reservation.user = User.find(session[:user]["id"])
 
     if @reservation.save
       flash.notice = "Reservation for #{@reservation.date} successful!"
