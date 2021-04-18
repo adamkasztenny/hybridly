@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ReservationPoliciesController do
-  let(:admin_user) { User.create!(email: "hybridly-admin@example.com") }
+  let!(:admin_user) { User.create!(email: "hybridly-admin@example.com") }
   let(:office_limit) { 25 }
 
   before do
@@ -65,7 +65,7 @@ RSpec.describe ReservationPoliciesController do
     end
 
     it 'does not save the reservation if the user is not an admin' do
-      regular_user = User.create!(email: "hybridly@example.com")
+      regular_user = create(:user)
       session[:user_id] = regular_user.id
 
       expect(ReservationPolicy.first).to be nil

@@ -17,7 +17,7 @@ RSpec.describe Secured, type: :controller do
 
   describe "when the user is logged in" do
     it "they should be not redirected to the login page" do
-      user = User.create!(email: "test@example.com")
+      user = create(:user)
       session[:user_id] = user.id
 
       get :fake_action

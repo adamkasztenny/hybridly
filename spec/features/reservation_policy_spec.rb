@@ -32,7 +32,7 @@ describe "Setting a reservation policy", type: :feature do
 
   context 'as a regular employee user' do
     before :each do
-      regular_user = User.create!(email: "hybridly@example.com")
+      regular_user = create(:user)
       authenticate(regular_user.email)
 
       visit '/'

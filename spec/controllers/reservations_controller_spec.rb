@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ReservationsController do
-  let(:user) { User.create!(email: "hybridly@example.com") }
+  let!(:user) { create(:user) }
 
   before do
     session[:user_id] = user.id
