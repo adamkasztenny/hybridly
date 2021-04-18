@@ -17,6 +17,11 @@ class ReservationsController < ApplicationController
     end
   end
 
+  def show_for_date
+    @date = params[:date]
+    @reservations = Reservation.for_date(@date)
+  end
+
   private
 
   def reservation_parameters
