@@ -3,10 +3,9 @@ require 'rails_helper'
 describe "Reserving a spot in the office", type: :feature do
   let!(:user) { create(:user) }
   let!(:other_user) { User.create!(email: "hybridly-other@example.com") }
+  let!(:admin_user) { create(:admin_user) }
 
   before :each do
-    admin_user = User.create!(email: "hybridly-admin@example.com")
-    admin_user.add_role(:admin)
     reservation_policy = ReservationPolicy.create!(office_limit: 1, user: admin_user)
 
     authenticate(user.email)

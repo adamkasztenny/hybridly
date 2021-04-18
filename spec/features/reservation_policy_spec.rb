@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 describe "Setting a reservation policy", type: :feature do
+  let!(:admin_user) { create(:admin_user) }
+
   context 'as an admin' do
     before :each do
-      admin_user = User.create!(email: "hybridly-admin@example.com")
-      admin_user.add_role(:admin)
       authenticate(admin_user.email)
 
       visit '/'
