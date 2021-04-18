@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe "Logging in", type: :feature do
   let!(:user) { create(:user) }
+  let!(:reservation_policy) { create(:reservation_policy) }
 
   it "authenticates the user" do
     login_as(user.email)
