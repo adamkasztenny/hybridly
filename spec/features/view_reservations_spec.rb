@@ -14,8 +14,6 @@ describe "Dashboard", type: :feature do
   end
 
   it "allows the user to click a day on the calendar and view a reservation" do
-    pending
-
     login_as(user.email)
 
     click_on "1 person in the office"
