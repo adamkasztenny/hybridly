@@ -6,10 +6,7 @@ describe "Reserving a spot in the office", type: :feature do
   let!(:reservation_policy) { create(:reservation_policy) }
 
   before :each do
-    authenticate(user.email)
-
-    visit '/'
-    click_button 'Login'
+    login_as(user.email)
   end
 
   it "allows the user to pick a date to go to the office" do
@@ -52,9 +49,7 @@ describe "Reserving a spot in the office", type: :feature do
     fill_in 'reservation_date', :with => '2022-01-01'
     click_on "Create Reservation"
 
-    authenticate(other_user.email)
-    visit '/'
-    click_button 'Login'
+    login_as(other_user.email)
 
     click_button 'Reserve time in the office'
 
@@ -72,9 +67,7 @@ describe "Reserving a spot in the office", type: :feature do
     click_on "Create Reservation"
     expect(page).to have_content "Reservation for 2022-01-01 successful!"
 
-    authenticate(other_user.email)
-    visit '/'
-    click_button 'Login'
+    login_as(other_user.email)
 
     click_button 'Reserve time in the office'
 
