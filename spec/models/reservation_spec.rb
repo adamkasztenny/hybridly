@@ -46,4 +46,21 @@ RSpec.describe Reservation, type: :model do
     expect(third_reservation).not_to be_valid
     expect(third_reservation.errors.full_messages).to eq(["Office limit has been reached for 2022-01-01"])
   end
+
+  context ".reservations_per_day" do
+    it "returns an empty hash if there are no reservations" do
+      expect(Reservation.reservations_per_day).to eq({})
+    end
+
+    it "returns the number of reservations per day" do
+      Reservation.create!(date: Date.new(2022, 1, 1), user: user)
+      Reservation.create!(date: Date.new(2022, 1, 2), user: user)
+
+      Reservation.create!(date: Date.new(2022, 1, 1), user: second_user)
+      Reservation.create!(date: Date.new(2022, 3, 1), user: second_user)
+
+      expect(Reservation.reservations_per_day).to eq({ Date.new(2022, 1, 1) => 2, Date.new(2022, 1, 2) => 1,
+                                                       Date.new(2022, 3, 1) => 1 })
+    end
+  end
 end

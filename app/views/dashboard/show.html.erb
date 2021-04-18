@@ -6,10 +6,10 @@
   <%= button_to 'Update reservation policy', new_reservation_policies_path, method: :get %>
 <% end %>
 
-<%= month_calendar(attribute: :first, events: @reservations_by_date) do |date, reservations_by_date| %>
+<%= month_calendar(attribute: :first, events: @reservations_per_day) do |date, reservations_per_day| %>
   <%= date %>
 
-  <% reservations_by_date.each do |_, count| %>
+  <% reservations_per_day.each do |_, count| %>
     <div>
       <%= format_reservation_count(count) %>
     </div>

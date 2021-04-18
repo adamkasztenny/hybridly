@@ -8,6 +8,10 @@ class Reservation < ApplicationRecord
 
   validate :does_not_exceed_office_limit
 
+  def self.reservations_per_day
+    Reservation.group(:date).count(:date)
+  end
+
   private
 
   def does_not_exceed_office_limit
