@@ -104,4 +104,23 @@ RSpec.describe Reservation, type: :model do
       expect(spots).to be 0
     end
   end
+
+  context ".for_date" do
+    it "returns an empty list if there are no reservations for a particular day" do
+      reservations = Reservation.for_date(Date.new(2022, 1, 1))
+
+      expect(reservations).to be_empty
+    end
+
+    it "returns a list of reservations for a particular day" do
+      first_resevation = Reservation.create!(date: Date.new(2022, 1, 1), user: user)
+      second_reservation = Reservation.create!(date: Date.new(2022, 1, 1), user: second_user)
+
+      reservations = Reservation.for_date(Date.new(2022, 1, 1))
+
+      expect(reservations.size).to be 2
+      expect(reservations).to include(first_resevation)
+      expect(reservations).to include(second_reservation)
+    end
+  end
 end

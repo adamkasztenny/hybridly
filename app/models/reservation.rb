@@ -18,6 +18,10 @@ class Reservation < ApplicationRecord
     office_limit - used_spots
   end
 
+  def self.for_date(date)
+    Reservation.where(date: date)
+  end
+
   private
 
   def does_not_exceed_office_limit
