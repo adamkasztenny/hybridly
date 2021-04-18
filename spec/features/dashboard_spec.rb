@@ -58,5 +58,4 @@ describe "Dashboard", type: :feature do
 
     expect(page).to have_content "2 spots are left in the office today"
   end
-
 end

@@ -12,6 +12,12 @@ class Reservation < ApplicationRecord
     Reservation.group(:date).count(:date)
   end
 
+  def self.spots_remaining_for_today
+    used_spots = Reservation.where(date: Date.today).count
+    office_limit = ReservationPolicy.current.office_limit
+    office_limit - used_spots
+  end
+
   private
 
   def does_not_exceed_office_limit
