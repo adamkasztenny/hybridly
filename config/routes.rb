@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   get '/dashboard' => 'dashboard#show'
 
   resource :reservations
+  resource :reservation_policies
 end
