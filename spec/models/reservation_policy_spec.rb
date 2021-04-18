@@ -45,4 +45,13 @@ RSpec.describe ReservationPolicy, type: :model do
 
     expect(ReservationPolicy.current).to eq(reservation_policy)
   end
+
+  it "always uses the latest policy as the current policy" do
+    ReservationPolicy.create!(office_limit: 75, user: admin_user)
+    ReservationPolicy.create!(office_limit: 10, user: admin_user)
+    ReservationPolicy.create!(office_limit: 100, user: admin_user)
+    latest_policy = ReservationPolicy.create!(office_limit: 25, user: admin_user)
+
+    expect(ReservationPolicy.current).to eq(latest_policy)
+  end
 end
