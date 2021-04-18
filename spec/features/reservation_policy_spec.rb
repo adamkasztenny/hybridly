@@ -3,6 +3,7 @@ require 'rails_helper'
 describe "Setting a reservation policy", type: :feature do
   let!(:admin_user) { create(:admin_user) }
   let!(:regular_user) { create(:user) }
+  let!(:reservation_policy) { create(:reservation_policy, user: admin_user) }
 
   context 'as an admin' do
     before :each do

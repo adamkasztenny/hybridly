@@ -44,8 +44,6 @@ describe "Dashboard", type: :feature do
   end
 
   it "displays how many people are allowed to be in the office" do
-    pending
-
     login_as(user.email)
 
     expect(page).to have_content "A total of 2 people are allowed in the office"

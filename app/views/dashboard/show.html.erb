@@ -2,6 +2,8 @@
 
 <%= button_to 'Reserve time in the office', new_reservations_path, method: :get %>
 
+<h2> <%= format_reservation_policy_count(@reservation_policy.office_limit) %> </h2>
+
 <% if @user.has_role?(:admin) %>
   <%= button_to 'Update reservation policy', new_reservation_policies_path, method: :get %>
 <% end %>
