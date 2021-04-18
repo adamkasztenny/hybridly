@@ -22,11 +22,10 @@ RSpec.describe AuthenticationController do
   end
 
   describe "when the user does exist in the database" do
-    it "they should be redirected to the dashboard page" do
-      email = "does-exist@example.com"
-      User.create!(email: email)
+    let!(:user) { create(:user) }
 
-      authenticate(email)
+    it "they should be redirected to the dashboard page" do
+      authenticate(user.email)
       request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:auth0]
 
       post :callback
@@ -35,10 +34,7 @@ RSpec.describe AuthenticationController do
     end
 
     it "their user id should be stored in a session" do
-      email = "does-exist@example.com"
-      User.create!(email: email)
-
-      authenticate(email)
+      authenticate(user.email)
       request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:auth0]
 
       post :callback

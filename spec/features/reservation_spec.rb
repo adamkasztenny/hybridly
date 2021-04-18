@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 describe "Reserving a spot in the office", type: :feature do
-  let(:user) { User.create!(email: "hybridly@example.com") }
-  let(:other_user) { User.create!(email: "hybridly-other@example.com") }
+  let!(:user) { create(:user) }
+  let!(:other_user) { User.create!(email: "hybridly-other@example.com") }
 
   before :each do
     admin_user = User.create!(email: "hybridly-admin@example.com")

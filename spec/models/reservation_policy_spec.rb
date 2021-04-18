@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ReservationPolicy, type: :model do
-  let (:admin_user) { User.new(email: "hybridly-admin@example.com") }
+  let!(:admin_user) { User.new(email: "hybridly-admin@example.com") }
 
   before do
     admin_user.add_role(:admin)
@@ -35,7 +35,7 @@ RSpec.describe ReservationPolicy, type: :model do
   end
 
   it "is invalid if the user who created the policy is not an admin" do
-    regular_user = User.new(email: "hybridly@example.com")
+    regular_user = create(:user)
     reservation_policy = ReservationPolicy.new(office_limit: 100, user: regular_user)
 
     expect(reservation_policy).not_to be_valid
