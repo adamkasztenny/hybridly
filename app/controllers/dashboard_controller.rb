@@ -2,6 +2,6 @@ class DashboardController < ApplicationController
   include Secured
 
   def show
-    @user = session[:user]
+    @user = User.find(session[:user]["id"])
   end
 end

@@ -2,7 +2,7 @@
 
 <%= form_with model: @reservation_policy do |form| %>
   <div>
-    <%= form.label :date %><br>
+    <%= form.label :office_limit %><br>
     <%= form.number_field  :office_limit %>
     <% @reservation_policy.errors.full_messages.each do |message| %>
       <div><%= message %></div>
@@ -10,6 +10,6 @@
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit "Update reservation policy" %>
   </div>
 <% end %>

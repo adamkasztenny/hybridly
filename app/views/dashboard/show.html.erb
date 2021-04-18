@@ -1,4 +1,8 @@
-<h1>Welcome <%= @user["email"] %>!</h1>
+<h1>Welcome <%= @user.email %>!</h1>
 
 <%= button_to 'Reserve time in the office', new_reservations_path, method: :get %>
+
+<% if @user.has_role?(:admin) %>
+  <%= button_to 'Update reservation policy', new_reservation_policies_path, method: :get %>
+<% end %>
 
