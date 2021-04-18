@@ -10,4 +10,10 @@ FactoryBot.define do
       user.add_role(:admin)
     end
   end
+
+  factory :reservation_policy do
+    office_limit { 1 }
+
+    user { association :admin_user }
+  end
 end
