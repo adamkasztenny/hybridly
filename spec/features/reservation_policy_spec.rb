@@ -15,7 +15,7 @@ describe "Setting a reservation policy", type: :feature do
       pending
 
       click_button 'Edit reservation policy'
-      expect(page).to have_content "Edit Reservation Policy"
+      expect(page).to have_content "Update Reservation Policy"
 
       fill_in 'reservation_policy_office_limit', :with => '2'
       click_on "Edit Reservation Policy"
@@ -26,8 +26,7 @@ describe "Setting a reservation policy", type: :feature do
     it "displays an error message if the limit is blank" do
       pending
 
-      click_button 'Reserve time in the office'
-
+      click_button 'Edit reservation policy'
       click_on "Edit Reservation Policy"
 
       expect(page).not_to have_content "Reservation policy updated!"
