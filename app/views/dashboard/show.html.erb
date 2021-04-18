@@ -8,6 +8,8 @@
   <%= button_to 'Update reservation policy', new_reservation_policies_path, method: :get %>
 <% end %>
 
+<h2> <%= format_spots_remaining(@spots_remaining_for_today) %> </h2>
+
 <%= month_calendar(attribute: :first, events: @reservations_per_day) do |date, reservations_per_day| %>
   <%= date %>
 

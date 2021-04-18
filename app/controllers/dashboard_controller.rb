@@ -7,5 +7,6 @@ class DashboardController < ApplicationController
       [date, count]
     end
     @reservation_policy = ReservationPolicy.current
+    @spots_remaining_for_today = Reservation.spots_remaining_for_today
   end
 end
