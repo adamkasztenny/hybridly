@@ -11,6 +11,12 @@ FactoryBot.define do
     end
   end
 
+  factory :reservation do
+    date { Date.parse('2022-01-01') }
+
+    user
+  end
+
   factory :reservation_policy do
     office_limit { 1 }
 

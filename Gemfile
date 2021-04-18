@@ -31,6 +31,8 @@ gem 'omniauth-rails_csrf_protection', '~> 0.1'
 
 gem "rolify"
 
+gem "simple_calendar", "~> 2.4"
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
@@ -67,6 +69,8 @@ group :test do
   gem 'webdrivers'
 
   gem 'simplecov'
+
+  gem 'timecop'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
