@@ -7,7 +7,7 @@ describe "Reserving a spot in the office", type: :feature do
   before :each do
     admin_user = User.create!(email: "hybridly-admin@example.com")
     admin_user.add_role(:admin)
-    reservation_policy = ReservationPolicy.new(office_limit: 1, user: admin_user)
+    reservation_policy = ReservationPolicy.create!(office_limit: 1, user: admin_user)
 
     authenticate(user.email)
 
@@ -50,8 +50,6 @@ describe "Reserving a spot in the office", type: :feature do
   end
 
   it "does not allow users to reserve a spot if the office limit has been reached for that date" do
-    pending
-
     click_button 'Reserve time in the office'
 
     fill_in 'reservation_date', :with => '2022-01-01'

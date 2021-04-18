@@ -5,6 +5,10 @@ RSpec.describe ReservationsController do
 
   before do
     session[:user_id] = user.id
+
+    admin_user = User.create!(email: "hybridly-admin@example.com")
+    admin_user.add_role(:admin)
+    ReservationPolicy.create!(office_limit: 2, user: admin_user)
   end
 
   it 'includes Secured' do
