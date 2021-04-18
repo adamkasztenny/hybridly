@@ -50,12 +50,10 @@ describe "Dashboard", type: :feature do
   end
 
   it "displays how many spots are left in the office for the current dasy" do
-    pending
-
     create(:reservation, user: user)
 
     login_as(user.email)
 
-    expect(page).to have_content "2 spots are left in the office today"
+    expect(page).to have_content "2 spots remaining for today"
   end
 end
