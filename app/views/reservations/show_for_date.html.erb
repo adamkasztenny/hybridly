@@ -1,0 +1,9 @@
+<h1>Reservations for <%= @date %></h1>
+<h2><%= format_reservation_count(@reservations.size) %></h2>
+
+<ul>
+  <% @reservations.each do |reservation| %>
+    <li><%= reservation.user.email %></li>
+  <% end %>
+</ul>
+
