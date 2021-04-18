@@ -11,12 +11,14 @@ RSpec.describe User, type: :model do
     user = User.new
 
     expect(user).not_to be_valid
+    expect(user.errors.full_messages).to eq(["Email can't be blank"])
   end
 
   it "not allow the email to be blank" do
     user = User.new(email: "")
 
     expect(user).not_to be_valid
+    expect(user.errors.full_messages).to eq(["Email can't be blank"])
   end
 
   it "enforces a unique email constraint" do
@@ -25,6 +27,7 @@ RSpec.describe User, type: :model do
 
     second_user = User.new(email: "hybridly@example.com")
     expect(second_user).not_to be_valid
+    expect(second_user.errors.full_messages).to eq(["Email has already been taken"])
   end
 
   it "should be a regular employee user by default" do
