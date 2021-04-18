@@ -8,6 +8,6 @@ module Secured
   private
 
   def logged_in?
-    redirect_to '/' unless session[:user].present?
+    redirect_to '/' unless session[:user_id].present?
   end
 end

@@ -6,7 +6,7 @@ RSpec.describe ReservationPoliciesController do
 
   before do
     admin_user.add_role(:admin)
-    session[:user] = admin_user.as_json
+    session[:user_id] = admin_user.id
   end
 
   it 'includes Secured' do
@@ -66,7 +66,7 @@ RSpec.describe ReservationPoliciesController do
 
     it 'does not save the reservation if the user is not an admin' do
       regular_user = User.create!(email: "hybridly@example.com")
-      session[:user] = regular_user.as_json
+      session[:user_id] = regular_user.id
 
       expect(ReservationPolicy.first).to be nil
 
