@@ -1,11 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe ReservationPoliciesController do
-  let!(:admin_user) { User.create!(email: "hybridly-admin@example.com") }
+  let!(:admin_user) { create(:admin_user) }
   let(:office_limit) { 25 }
 
   before do
-    admin_user.add_role(:admin)
     session[:user_id] = admin_user.id
   end
 
