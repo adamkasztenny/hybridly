@@ -1,14 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Reservation, type: :model do
-  let(:user) { User.new(email: "hybridly@example.com") }
-  let(:second_user) { User.new(email: "hybridly-second@example.com") }
-  let(:third_user) { User.new(email: "hybridly-third@example.com") }
-  let!(:admin_user) { create(:admin_user) }
-
-  before do
-    ReservationPolicy.create!(office_limit: 2, user: admin_user)
-  end
+  let!(:user) { create(:user) }
+  let(:second_user) { create(:user, email: "hybridly-second@example.com") }
+  let(:third_user) { create(:user, email: "hybridly-third@example.com") }
+  let!(:reservation_policy) { create(:reservation_policy, office_limit: 2) }
 
   it "can be valid" do
     reservation = Reservation.new(date: Date.new(2022, 1, 1), user: user)
