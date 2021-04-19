@@ -12,7 +12,9 @@
     </div>
 
     <% @reservation_policy.errors.full_messages.each do |message| %>
-      <div><%= message %></div>
+      <div class="uk-alert-danger" uk-alert>
+          <p><%= message %></p>
+      </div>
     <% end %>
 
     <%= form.submit "Update", :class => "uk-button uk-button-primary" %>
