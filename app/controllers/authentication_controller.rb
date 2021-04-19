@@ -9,6 +9,7 @@ class AuthenticationController < ApplicationController
     end
 
     session[:user_id] = user.id
+    session[:user_email] = user.email
 
     Rails.logger.info "User with email #{email} authenticated successfully"
     redirect_to '/dashboard'

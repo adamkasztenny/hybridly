@@ -19,6 +19,15 @@ RSpec.describe AuthenticationController do
 
       expect(session[:user_id]).to be nil
     end
+
+    it "their user email should not be stored in a session" do
+      authenticate("does-not-exist@example.com")
+      request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:auth0]
+
+      post :callback
+
+      expect(session[:user_email]).to be nil
+    end
   end
 
   describe "when the user does exist in the database" do
@@ -40,6 +49,15 @@ RSpec.describe AuthenticationController do
       post :callback
 
       expect(session[:user_id]).not_to be nil
+    end
+
+    it "their user email should be stored in a session" do
+      authenticate(user.email)
+      request.env['omniauth.auth'] = OmniAuth.config.mock_auth[:auth0]
+
+      post :callback
+
+      expect(session[:user_email]).not_to be nil
     end
   end
 end
