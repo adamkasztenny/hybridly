@@ -29,6 +29,12 @@
               <ul class="uk-navbar-nav">
                   <li class="uk-active"><%= link_to 'Reserve time in the office', new_reservations_path %></li>
               </ul>
+
+            <% if User.find(session[:user_id]).has_role?(:admin) %>
+                <ul class="uk-navbar-nav">
+                    <li class="uk-active"><%= link_to 'Update reservation policy', new_reservation_policies_path %></li>
+                </ul>
+            <% end %>
           </div>
           <div class="uk-navbar-right">
               <ul class="uk-navbar-nav">
