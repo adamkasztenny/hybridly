@@ -8,12 +8,16 @@
     <p><%= format_spots_remaining(@spots_remaining_for_today) %></p>
 </div>
 
-<%= month_calendar(attribute: :first, events: @reservations_per_day) do |date, reservations_per_day| %>
-  <%= date %>
+<hr>
 
-  <% reservations_per_day.each do |_, count| %>
-    <div>
-      <%= link_to format_reservation_count(count), "#{reservations_path}/#{date}" %>
-    </div>
+<div class="uk-card uk-card-body">
+  <%= month_calendar(attribute: :first, events: @reservations_per_day) do |date, reservations_per_day| %>
+    <%= date %>
+
+    <% reservations_per_day.each do |_, count| %>
+      <div>
+        <%= link_to format_reservation_count(count), "#{reservations_path}/#{date}" %>
+      </div>
+    <% end %>
   <% end %>
-<% end %>
+</div>
