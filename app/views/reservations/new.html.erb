@@ -11,11 +11,7 @@
       </div>
     </div>
 
-    <% @reservation.errors.full_messages.each do |message| %>
-      <div class="uk-alert-danger" uk-alert>
-          <p><%= message %></p>
-      </div>
-    <% end %>
+    <%= render :partial => 'form_errors', locals: { model: @reservation } %>
 
     <%= form.submit :class => "uk-button uk-button-primary" %>
   <% end %>
