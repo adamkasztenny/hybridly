@@ -1,5 +1,28 @@
 @import "simple_calendar";
 
+@import "uikit/src/scss/variables-theme.scss";
+@import "uikit/src/scss/mixins-theme.scss";
+@import "uikit/src/scss/uikit-theme.scss";
+
 .avatar {
   border-radius: 50%;
 }
+
+.calendar-heading {
+  margin-left: 35%;
+  margin-right: 35%;
+  margin-bottom: 1%;
+}
+
+.calendar-heading a {
+  @extend .uk-button;
+  @extend .uk-button-primary;
+}
+
+.calendar-title {
+  @extend .uk-heading-small;
+
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
