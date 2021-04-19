@@ -1,15 +1,20 @@
-<h1>New Reservation</h1>
+<div class="uk-card uk-card-body">
+  <h1 class="uk-heading-small">New Reservation</h1>
 
-<%= form_with model: @reservation do |form| %>
-  <div>
-    <%= form.label :date %><br>
-    <%= form.date_field :date%>
-    <% @reservation.errors.full_messages.each do |message| %>
-      <div><%= message %></div>
-    <% end %>
-  </div>
+  <h1 class="uk-heading-divider"></h1>
 
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+  <%= form_with :html => {:class => "uk-form-horizontal"}, model: @reservation do |form| %>
+      <div>
+        <%= form.label :date, :class => "uk-form-label" %>
+        <div class="uk-form-controls">
+          <%= form.date_field :date, :class=> "uk-input" %>
+        </div>
+
+        <% @reservation.errors.full_messages.each do |message| %>
+          <div><%= message %></div>
+        <% end %>
+
+        <%= form.submit :class => "uk-button uk-button-primary" %>
+      </div>
+  <% end %>
+</div>
