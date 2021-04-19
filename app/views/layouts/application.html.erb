@@ -44,13 +44,17 @@
       </nav>
     <% end %>
 
-    <% flash.each do |type, msg| %>
-      <div class="uk-alert-success" uk-alert>
-        <a class="uk-alert-close" uk-close></a>
-        <p>&#127881; <%= msg %></p>
-      </div>
-    <% end %>
+    <div class="uk-card uk-card-body">
+      <% flash.each do |type, msg| %>
+        <div class="uk-alert-success" uk-alert>
+          <a class="uk-alert-close" uk-close></a>
+          <p>&#127881; <%= msg %></p>
+        </div>
 
-    <%= yield %>
+        <hr>
+      <% end %>
+
+      <%= yield %>
+    </div>
   </body>
 </html>
