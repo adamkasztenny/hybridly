@@ -10,7 +10,7 @@ describe "Reserving a spot in the office", type: :feature do
   end
 
   it "allows the user to pick a date to go to the office" do
-    click_button 'Reserve time in the office'
+    click_on 'Reserve time in the office'
     expect(page).to have_content "New Reservation"
 
     fill_in 'reservation_date', :with => '2022-01-01'
@@ -20,7 +20,7 @@ describe "Reserving a spot in the office", type: :feature do
   end
 
   it "displays an error message if no reservation date is picked" do
-    click_button 'Reserve time in the office'
+    click_on 'Reserve time in the office'
 
     click_on "Create Reservation"
 
@@ -29,12 +29,12 @@ describe "Reserving a spot in the office", type: :feature do
   end
 
   it "does not allow the user to reserve the same date twice" do
-    click_button 'Reserve time in the office'
+    click_on 'Reserve time in the office'
 
     fill_in 'reservation_date', :with => '2022-01-01'
     click_on "Create Reservation"
 
-    click_button 'Reserve time in the office'
+    click_on 'Reserve time in the office'
 
     fill_in 'reservation_date', :with => '2022-01-01'
     click_on "Create Reservation"
@@ -44,14 +44,14 @@ describe "Reserving a spot in the office", type: :feature do
   end
 
   it "does not allow users to reserve a spot if the office limit has been reached for that date" do
-    click_button 'Reserve time in the office'
+    click_on 'Reserve time in the office'
 
     fill_in 'reservation_date', :with => '2022-01-01'
     click_on "Create Reservation"
 
     login_as(other_user.email)
 
-    click_button 'Reserve time in the office'
+    click_on 'Reserve time in the office'
 
     fill_in 'reservation_date', :with => '2022-01-01'
     click_on "Create Reservation"
@@ -61,7 +61,7 @@ describe "Reserving a spot in the office", type: :feature do
   end
 
   it "does not allow users to reserve a spot if the office limit has not been reached for that date" do
-    click_button 'Reserve time in the office'
+    click_on 'Reserve time in the office'
 
     fill_in 'reservation_date', :with => '2022-01-01'
     click_on "Create Reservation"
@@ -69,7 +69,7 @@ describe "Reserving a spot in the office", type: :feature do
 
     login_as(other_user.email)
 
-    click_button 'Reserve time in the office'
+    click_on 'Reserve time in the office'
 
     fill_in 'reservation_date', :with => '2022-01-02'
     click_on "Create Reservation"

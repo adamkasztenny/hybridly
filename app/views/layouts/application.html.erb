@@ -26,14 +26,14 @@
               <ul class="uk-navbar-nav">
                   <li class="uk-active"><%= link_to 'Dashboard', dashboard_path %></li>
               </ul>
-
+              <ul class="uk-navbar-nav">
+                  <li class="uk-active"><%= link_to 'Reserve time in the office', new_reservations_path %></li>
+              </ul>
           </div>
           <div class="uk-navbar-right">
-
               <ul class="uk-navbar-nav">
                   <li class="uk-active"><a><%= session[:user_email] %></a></li>
               </ul>
-
           </div>
       </nav>
     <% end %>
