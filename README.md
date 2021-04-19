@@ -1,3 +1,3 @@
 # Hybridly
 
-A hybrid work solution
+A return to office solution
