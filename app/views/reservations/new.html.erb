@@ -4,17 +4,19 @@
   <h1 class="uk-heading-divider"></h1>
 
   <%= form_with :html => {:class => "uk-form-horizontal"}, model: @reservation do |form| %>
-      <div>
-        <%= form.label :date, :class => "uk-form-label" %>
-        <div class="uk-form-controls">
-          <%= form.date_field :date, :class=> "uk-input" %>
-        </div>
-
-        <% @reservation.errors.full_messages.each do |message| %>
-          <div><%= message %></div>
-        <% end %>
-
-        <%= form.submit :class => "uk-button uk-button-primary" %>
+    <div>
+      <%= form.label :date, :class => "uk-form-label" %>
+      <div class="uk-form-controls">
+        <%= form.date_field :date, :class=> "uk-input" %>
       </div>
+    </div>
+
+    <% @reservation.errors.full_messages.each do |message| %>
+      <div class="uk-alert-danger" uk-alert>
+          <p><%= message %></p>
+      </div>
+    <% end %>
+
+    <%= form.submit :class => "uk-button uk-button-primary" %>
   <% end %>
 </div>
