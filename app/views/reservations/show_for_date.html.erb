@@ -1,10 +1,12 @@
-<h1>Reservations for <%= @date %></h1>
-<h2><%= format_reservation_count(@reservations.size) %></h2>
+<div class="uk-card uk-card-body">
+  <h1 class="uk-heading-small">Reservations for <%= @date %></h1>
 
-<h3>People in the office:</h3>
-<ul>
-  <% @reservations.each do |reservation| %>
-    <li><%= reservation.user.email %></li>
-  <% end %>
-</ul>
+  <h1 class="uk-heading-divider"></h1>
 
+  <h3><%= format_reservation_count(@reservations.size) %>:</h3>
+  <ul class="uk-list uk-list-square">
+    <% @reservations.each do |reservation| %>
+      <li><%= reservation.user.email %></li>
+    <% end %>
+  </ul>
+</div>
