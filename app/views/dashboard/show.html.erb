@@ -1,5 +1,3 @@
-<%= button_to 'Reserve time in the office', new_reservations_path, method: :get %>
-
 <div class="uk-alert-primary" uk-alert>
     <a class="uk-alert-close" uk-close></a>
     <p><%= format_reservation_policy_count(@reservation_policy.office_limit) %></p>
