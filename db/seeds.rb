@@ -11,6 +11,14 @@ else
   admin_user.add_role(:admin)
 end
 
-office_limit = 5
+office_limit = 3
 Rails.logger.info "Creating default reservation policy with office limit #{office_limit}"
 ReservationPolicy.create!(user: admin_user, office_limit: office_limit)
+
+
+Rails.logger.info "Creating other users"
+violette = User.create!(:email => "violette@example.com")
+nia = User.create!(:email => "nia@example.com")
+caleb = User.create!(:email => "caleb@example.com")
+keisha = User.create!(:email => "keisha@example.com")
+
