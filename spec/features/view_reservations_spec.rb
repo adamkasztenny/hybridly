@@ -20,9 +20,8 @@ describe "Dashboard", type: :feature do
     click_on "2 people in the office"
 
     expect(page).to have_content "Reservations for 2022-01-01"
-    expect(page).to have_content "2 people in the office"
+    expect(page).to have_content "2 people in the office:"
 
-    expect(page).to have_content "People in the office:"
     expect(page).to have_content "hybridly@example.com"
     expect(page).to have_content "other-hybridly@example.com"
   end
