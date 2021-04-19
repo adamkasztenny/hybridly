@@ -1,15 +1,20 @@
-<h1>Edit Reservation Policy</h1>
+<div class="uk-card uk-card-body">
+  <h1 class="uk-heading-small">Edit Reservation Policy</h1>
 
-<%= form_with model: @reservation_policy do |form| %>
-  <div>
-    <%= form.label :office_limit %><br>
-    <%= form.number_field  :office_limit %>
+  <h1 class="uk-heading-divider"></h1>
+
+  <%= form_with :html => {:class => "uk-form-horizontal"}, model: @reservation_policy do |form| %>
+    <div>
+      <%= form.label :office_limit, :class => "uk-form-label" %><br>
+      <div class="uk-form-controls">
+        <%= form.number_field  :office_limit, :class=> "uk-input" %>
+      </div>
+    </div>
+
     <% @reservation_policy.errors.full_messages.each do |message| %>
       <div><%= message %></div>
     <% end %>
-  </div>
 
-  <div>
-    <%= form.submit "Update" %>
-  </div>
-<% end %>
+    <%= form.submit "Update", :class => "uk-button uk-button-primary" %>
+  <% end %>
+</div>
