@@ -16,6 +16,6 @@ describe "Logging in", type: :feature do
 
     expect(page).not_to have_content "Welcome #{user.email}!"
     expect(page).not_to have_content "Welcome #{non_existent_email}!"
-    expect(page).to have_content "Login failed"
+    expect(page).to have_content "Login Failed"
   end
 end
