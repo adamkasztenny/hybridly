@@ -17,5 +17,7 @@ spec/
 
 node_modules
 
-db/test*
 db/development*
+db/test*
+tmp/
+log/
