@@ -1,0 +1,21 @@
+/.bundle/
+/.yardoc
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+
+# rspec failure tracking
+.rspec_status
+
+*.swp
+webrat.log
+Gemfile.lock
+spec/
+
+node_modules
+
+db/test*
+db/development*
