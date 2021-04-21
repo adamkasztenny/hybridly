@@ -13,11 +13,9 @@ RUN bundle install
 
 RUN npm install -g yarn
 
-RUN rake db:migrate
-
 RUN rake assets:precompile
 RUN bin/webpack
 
 EXPOSE 3000
-ENTRYPOINT ["rails", "s", "-e", "production"]
+ENTRYPOINT ["/bin/sh", "-c", "make migrate && rails s -e production"]
 
