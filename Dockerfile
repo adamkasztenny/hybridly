@@ -6,7 +6,7 @@ WORKDIR /opt
 
 COPY . .
 
-RUN apk add --no-cache build-base git sqlite sqlite-dev sqlite-libs libxml2-dev nodejs nodejs-npm make
+RUN apk add --no-cache build-base sqlite-dev nodejs nodejs-npm make
 
 RUN bundle config set --local without 'development test'
 RUN bundle install
