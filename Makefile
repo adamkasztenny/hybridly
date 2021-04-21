@@ -8,7 +8,7 @@ build:
 	docker build -t ${PROJECT} .
 
 start: build
-	docker run --name ${PROJECT} -e AUTH0_DOMAIN -e AUTH0_CLIENT_ID -e AUTH0_CLIENT_SECRET -d -p 3000:3000 ${PROJECT}
+	docker run --name ${PROJECT} -e AUTH0_DOMAIN -e AUTH0_CLIENT_ID -e AUTH0_CLIENT_SECRET -e DEFAULT_USER_EMAIL -d -p 3000:3000 ${PROJECT}
 
 stop:
 	docker stop ${PROJECT}
