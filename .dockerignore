@@ -24,4 +24,3 @@ tmp/
 log/
 
 *.tar
-config/credentials.yml.enc
