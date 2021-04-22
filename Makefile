@@ -5,6 +5,9 @@ install:
 	bundle install
 	yarn install
 
+create_secret:
+	EDITOR=stub bin/rails credentials:edit
+
 build:
 	docker build -t ${PROJECT} .
 
