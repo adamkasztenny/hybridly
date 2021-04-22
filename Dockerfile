@@ -19,5 +19,5 @@ RUN bin/webpack
 RUN apk del nodejs nodejs-npm
 
 EXPOSE 3000
-ENTRYPOINT ["/bin/sh", "-c", "make migrate && rails s -e production"]
+CMD ["/bin/sh", "-c", "make migrate && rails s -e production"]
 
