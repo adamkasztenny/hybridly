@@ -22,3 +22,6 @@ db/development*
 db/test*
 tmp/
 log/
+
+*.tar
+config/credentials.yml.enc
