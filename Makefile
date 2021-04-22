@@ -14,6 +14,9 @@ start: build
 stop:
 	docker stop ${PROJECT}
 
+save:
+	docker save ${PROJECT}:latest > hybridly-latest.tar
+
 start_development: install
 	bin/rails server
 
