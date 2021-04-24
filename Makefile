@@ -5,7 +5,7 @@ install:
 	bundle install
 	yarn install
 
-create_secret:
+create_secret: install
 	EDITOR=stub bin/rails credentials:edit
 
 build:
