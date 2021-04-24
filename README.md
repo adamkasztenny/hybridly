@@ -30,7 +30,7 @@ You will need an Auth0 account, as well as Docker, make and Ruby 3.0.1 installed
 	make start
 	make seed_container
 ```
-1. Open [localhost:3000](http://localhost:3000) in your browser to use Hybridly!
+Open [localhost:3000](http://localhost:3000) in your browser to use Hybridly!
 
 ## Local Development
 In addition to the tools above, you will also need Node and Yarn installed for local development.
