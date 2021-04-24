@@ -14,7 +14,7 @@ describe "Creating a workstation", type: :feature do
       expect(page).to have_link("Create Workstation")
     end
 
-    it "allows the admin to set a limit on the number of employees who can be in the office" do
+    it "allows the admin to create a workstation" do
       click_on 'Create Workstation'
       expect(page).to have_content "Create Workstation"
 
