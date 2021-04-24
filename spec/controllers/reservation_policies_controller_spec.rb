@@ -27,7 +27,7 @@ RSpec.describe ReservationPoliciesController do
       expect(ReservationPolicy.first.office_limit).to eq(office_limit)
     end
 
-    it 'saves the admin_user who created the reservation' do
+    it 'saves the admin_user who created the reservation policy' do
       post :create, :params => { :reservation_policy => { :office_limit => office_limit } }
 
       expect(ReservationPolicy.first.user).to eq(admin_user)
@@ -55,7 +55,7 @@ RSpec.describe ReservationPoliciesController do
       expect(ReservationPolicy.first).to be nil
     end
 
-    it 'does not save the reservation if the office limit is invalid' do
+    it 'does not save the reservation policy if the office limit is invalid' do
       expect(ReservationPolicy.first).to be nil
 
       post :create, :params => { :reservation_policy => { :office_limit => "invalid" } }
@@ -63,7 +63,7 @@ RSpec.describe ReservationPoliciesController do
       expect(ReservationPolicy.first).to be nil
     end
 
-    it 'does not save the reservation if the user is not an admin' do
+    it 'does not save the reservation policy if the user is not an admin' do
       regular_user = create(:user)
       session[:user_id] = regular_user.id
 

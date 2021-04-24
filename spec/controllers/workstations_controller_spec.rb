@@ -28,7 +28,7 @@ RSpec.describe WorkstationsController do
       expect(Workstation.first.capacity).to eq(capacity)
     end
 
-    it 'saves the admin_user who created the reservation' do
+    it 'saves the admin_user who created the workstation' do
       post :create, :params => { :workstation => { :location => location, :capacity => capacity } }
 
       expect(Workstation.first.user).to eq(admin_user)
@@ -64,7 +64,7 @@ RSpec.describe WorkstationsController do
       expect(Workstation.first).to be nil
     end
 
-    it 'does not save the reservation if the capacity is invalid' do
+    it 'does not save the workstation if the capacity is invalid' do
       expect(Workstation.first).to be nil
 
       post :create, :params => { :workstation => { :location => location, :capacity => "invalid" } }
@@ -72,7 +72,7 @@ RSpec.describe WorkstationsController do
       expect(Workstation.first).to be nil
     end
 
-    it 'does not save the reservation if the user is not an admin' do
+    it 'does not save the workstation if the user is not an admin' do
       regular_user = create(:user)
       session[:user_id] = regular_user.id
 
