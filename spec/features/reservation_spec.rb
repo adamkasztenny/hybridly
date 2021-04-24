@@ -43,7 +43,7 @@ describe "Reserving a spot in the office", type: :feature do
     expect(page).to have_content "User has already reserved 2022-01-01"
   end
 
-  it "does not allow users to reserve a spot if the office limit has been reached for that date" do
+  it "does not allow users to reserve a spot if the capacity has been reached for that date" do
     click_on 'Reserve time in the office'
 
     fill_in 'reservation_date', :with => '2022-01-01'
@@ -57,10 +57,10 @@ describe "Reserving a spot in the office", type: :feature do
     click_on "Create Reservation"
 
     expect(page).not_to have_content "Reservation for 2022-01-01 successful!"
-    expect(page).to have_content "Office limit has been reached for 2022-01-01"
+    expect(page).to have_content "Capacity has been reached for 2022-01-01"
   end
 
-  it "does not allow users to reserve a spot if the office limit has not been reached for that date" do
+  it "does not allow users to reserve a spot if the capacity has not been reached for that date" do
     click_on 'Reserve time in the office'
 
     fill_in 'reservation_date', :with => '2022-01-01'

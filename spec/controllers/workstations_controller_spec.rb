@@ -48,7 +48,7 @@ RSpec.describe WorkstationsController do
   end
 
   context 'creating a new workstation unsuccessfully' do
-   it 'does not save the workstation if the location is empty' do
+    it 'does not save the workstation if the location is empty' do
       expect(Workstation.first).to be nil
 
       post :create, :params => { :workstation => { :location => "", :capacity => capacity } }

@@ -2,7 +2,7 @@ class ReservationPolicy < ApplicationRecord
   include UserValidations
 
   belongs_to :user
-  validates :office_limit, presence: true, numericality: { greater_than_or_equal_to: 0 }
+  validates :capacity, presence: true, numericality: { greater_than_or_equal_to: 0 }
 
   validate :user_must_be_an_admin
 

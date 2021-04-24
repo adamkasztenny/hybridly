@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ReservationsController do
   let!(:user) { create(:user) }
-  let!(:reservation_policy) { create(:reservation_policy, office_limit: 2) }
+  let!(:reservation_policy) { create(:reservation_policy, capacity: 2) }
 
   before do
     session[:user_id] = user.id

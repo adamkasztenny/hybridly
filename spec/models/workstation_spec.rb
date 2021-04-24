@@ -15,8 +15,8 @@ RSpec.describe Workstation, type: :model do
     expect(workstation).to be_valid
   end
 
-  it "is still valid if the total capacity exceeds the office limit" do
-    ReservationPolicy.create!(office_limit: 10, user: admin_user)
+  it "is still valid if the total capacity exceeds the capacity" do
+    ReservationPolicy.create!(capacity: 10, user: admin_user)
 
     first_workstation = Workstation.new(location: "HR Office", capacity: 5, user: admin_user)
     expect(first_workstation).to be_valid

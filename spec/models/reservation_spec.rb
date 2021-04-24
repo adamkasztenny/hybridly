@@ -4,7 +4,7 @@ RSpec.describe Reservation, type: :model do
   let!(:user) { create(:user) }
   let(:second_user) { create(:user, email: "hybridly-second@example.com") }
   let(:third_user) { create(:user, email: "hybridly-third@example.com") }
-  let!(:reservation_policy) { create(:reservation_policy, office_limit: 2) }
+  let!(:reservation_policy) { create(:reservation_policy, capacity: 2) }
 
   it "can be valid" do
     reservation = Reservation.new(date: Date.new(2022, 1, 1), user: user)
@@ -34,7 +34,7 @@ RSpec.describe Reservation, type: :model do
     expect(reservation.errors.full_messages).to eq(["User has already reserved 2022-01-01"])
   end
 
-  it "does not allow the user to book the date if the booking exceeds the office limit" do
+  it "does not allow the user to book the date if the booking exceeds the capacity" do
     first_resevation = Reservation.create!(date: Date.new(2022, 1, 1), user: user)
     expect(first_resevation).to be_valid
 
@@ -44,7 +44,7 @@ RSpec.describe Reservation, type: :model do
     third_reservation = Reservation.new(date: Date.new(2022, 1, 1), user: third_user)
 
     expect(third_reservation).not_to be_valid
-    expect(third_reservation.errors.full_messages).to eq(["Office limit has been reached for 2022-01-01"])
+    expect(third_reservation.errors.full_messages).to eq(["Capacity has been reached for 2022-01-01"])
   end
 
   context ".reservations_per_day" do
@@ -73,13 +73,13 @@ RSpec.describe Reservation, type: :model do
       Timecop.return
     end
 
-    it "returns the office limit if there are no reservations made" do
+    it "returns the capacity if there are no reservations made" do
       spots = Reservation.spots_remaining_for_today
 
       expect(spots).to be 2
     end
 
-    it "returns the office limit if there are no reservations made and reservations have been made for other days" do
+    it "returns the capacity if there are no reservations made and reservations have been made for other days" do
       Reservation.create!(date: Date.new(2022, 1, 5), user: user)
 
       spots = Reservation.spots_remaining_for_today

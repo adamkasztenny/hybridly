@@ -6,7 +6,7 @@ class Reservation < ApplicationRecord
     "has already reserved #{object.date}"
   end
 
-  validate :does_not_exceed_office_limit
+  validate :does_not_exceed_capacity
 
   def self.reservations_per_day
     Reservation.group(:date).count(:date)
@@ -14,8 +14,8 @@ class Reservation < ApplicationRecord
 
   def self.spots_remaining_for_today
     used_spots = Reservation.where(date: Date.today).count
-    office_limit = ReservationPolicy.current.office_limit
-    office_limit - used_spots
+    capacity = ReservationPolicy.current.capacity
+    capacity - used_spots
   end
 
   def self.for_date(date)
@@ -24,11 +24,11 @@ class Reservation < ApplicationRecord
 
   private
 
-  def does_not_exceed_office_limit
-    office_is_fully_booked = ReservationPolicy.current.office_limit < reservations_for(date)
+  def does_not_exceed_capacity
+    office_is_fully_booked = ReservationPolicy.current.capacity < reservations_for(date)
 
     if office_is_fully_booked
-      errors.add(:office_limit, "has been reached for #{date}")
+      errors.add(:capacity, "has been reached for #{date}")
     end
   end
 

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ReservationPoliciesController do
   let!(:admin_user) { create(:admin_user) }
-  let(:office_limit) { 25 }
+  let(:capacity) { 25 }
 
   before do
     session[:user_id] = admin_user.id
@@ -16,49 +16,49 @@ RSpec.describe ReservationPoliciesController do
     it 'saves the reservation policy' do
       expect(ReservationPolicy.first).to be nil
 
-      post :create, :params => { :reservation_policy => { :office_limit => office_limit } }
+      post :create, :params => { :reservation_policy => { :capacity => capacity } }
 
       expect(ReservationPolicy.first).not_to be nil
     end
 
-    it 'saves the office limit on the reservation policy' do
-      post :create, :params => { :reservation_policy => { :office_limit => office_limit } }
+    it 'saves the capacity on the reservation policy' do
+      post :create, :params => { :reservation_policy => { :capacity => capacity } }
 
-      expect(ReservationPolicy.first.office_limit).to eq(office_limit)
+      expect(ReservationPolicy.first.capacity).to eq(capacity)
     end
 
     it 'saves the admin_user who created the reservation policy' do
-      post :create, :params => { :reservation_policy => { :office_limit => office_limit } }
+      post :create, :params => { :reservation_policy => { :capacity => capacity } }
 
       expect(ReservationPolicy.first.user).to eq(admin_user)
     end
 
     it 'includes a successful flash message' do
-      post :create, :params => { :reservation_policy => { :office_limit => office_limit } }
+      post :create, :params => { :reservation_policy => { :capacity => capacity } }
 
-      expect(flash.notice).to eq("Policy updated to permit #{office_limit} people in the office")
+      expect(flash.notice).to eq("Policy updated to permit #{capacity} people in the office")
     end
 
     it 'redirects to the dashboard' do
-      post :create, :params => { :reservation_policy => { :office_limit => office_limit } }
+      post :create, :params => { :reservation_policy => { :capacity => capacity } }
 
       expect(response).to redirect_to('/dashboard')
     end
   end
 
   context 'creating a new reservation policy unsuccessfully' do
-    it 'does not save the reservation policy if the office limit is empty' do
+    it 'does not save the reservation policy if the capacity is empty' do
       expect(ReservationPolicy.first).to be nil
 
-      post :create, :params => { :reservation_policy => { :office_limit => "" } }
+      post :create, :params => { :reservation_policy => { :capacity => "" } }
 
       expect(ReservationPolicy.first).to be nil
     end
 
-    it 'does not save the reservation policy if the office limit is invalid' do
+    it 'does not save the reservation policy if the capacity is invalid' do
       expect(ReservationPolicy.first).to be nil
 
-      post :create, :params => { :reservation_policy => { :office_limit => "invalid" } }
+      post :create, :params => { :reservation_policy => { :capacity => "invalid" } }
 
       expect(ReservationPolicy.first).to be nil
     end
@@ -69,7 +69,7 @@ RSpec.describe ReservationPoliciesController do
 
       expect(ReservationPolicy.first).to be nil
 
-      post :create, :params => { :reservation_policy => { :office_limit => office_limit } }
+      post :create, :params => { :reservation_policy => { :capacity => capacity } }
 
       expect(ReservationPolicy.first).to be nil
     end
