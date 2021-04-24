@@ -34,3 +34,6 @@ migrate:
 
 seed: migrate
 	rake db:seed
+
+seed_container:
+	docker exec ${PROJECT} make seed
