@@ -1,0 +1,23 @@
+<div class="uk-card uk-card-body">
+  <h1 class="uk-heading-small">Create Workstation</h1>
+
+  <h1 class="uk-heading-divider"></h1>
+
+  <%= form_with :html => {:class => "uk-form-horizontal"}, model: @workstation do |form| %>
+    <div>
+      <%= form.label :location, :class => "uk-form-label" %><br>
+      <div class="uk-form-controls">
+        <%= form.input :location, :class=> "uk-input" %>
+      </div>
+
+      <%= form.label :capacity, :class => "uk-form-label" %><br>
+      <div class="uk-form-controls">
+        <%= form.number_field  :capacity, :class=> "uk-input" %>
+      </div>
+    </div>
+
+    <%= render :partial => 'form_errors', locals: { model: @workstation } %>
+
+    <%= form.submit "Create", :class => "uk-button uk-button-primary" %>
+  <% end %>
+</div>
