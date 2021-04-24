@@ -10,16 +10,12 @@ describe "Creating a workstation", type: :feature do
       login_as(admin_user.email)
     end
 
-    it 'the edit link is visible' do
-      pending
-
-      expect(page).to have_link("Create workstation")
+    it 'the create link is visible' do
+      expect(page).to have_link("Create Workstation")
     end
 
     it "allows the admin to set a limit on the number of employees who can be in the office" do
-      pending
-
-      click_on 'Create workstation'
+      click_on 'Create Workstation'
       expect(page).to have_content "Create Workstation"
 
       fill_in 'workstation_location', :with => 'Engineering'
@@ -30,8 +26,6 @@ describe "Creating a workstation", type: :feature do
     end
 
     it "displays an error message if the location is blank" do
-      pending
-
       click_on 'Create Workstation'
 
       fill_in 'workstation_capacity', :with => 5
@@ -42,15 +36,13 @@ describe "Creating a workstation", type: :feature do
     end
 
     it "displays an error message if the capacity is not provided" do
-      pending
-
       click_on 'Create Workstation'
 
       fill_in 'workstation_location', :with => 'Engineering'
       click_on "Create"
 
       expect(page).not_to have_content "Engineering workstation created"
-      expect(page).to have_content "Location can't be blank"
+      expect(page).to have_content "Capacity can't be blank"
     end
   end
 
@@ -59,7 +51,7 @@ describe "Creating a workstation", type: :feature do
       login_as(regular_user.email)
     end
 
-    it 'the edit link is not visible' do
+    it 'the create link is not visible' do
       expect(page).not_to have_link("Create workstation")
     end
   end
