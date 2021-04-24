@@ -15,6 +15,11 @@ office_limit = 3
 Rails.logger.info "Creating default reservation policy with office limit #{office_limit}"
 ReservationPolicy.find_or_create_by!(user: admin_user, office_limit: office_limit)
 
+Rails.logger.info "Creating workstations"
+Workstation.find_or_create_by!(user: admin_user, location: "Engineering", capacity: 10)
+Workstation.find_or_create_by!(user: admin_user, location: "HR", capacity: 5)
+Workstation.find_or_create_by!(user: admin_user, location: "Sales", capacity: 20)
+
 Rails.logger.info "Creating other users"
 violette = User.find_or_create_by!(:email => "violette@example.com")
 nia = User.find_or_create_by!(:email => "nia@example.com")
