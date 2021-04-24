@@ -32,3 +32,11 @@ You will need an Auth0 account, as well as Docker, make and Ruby 3.0.1 installed
 ```
 1. Open [localhost:3000](http://localhost:3000) in your browser to use Hybridly!
 
+## Local Development
+In addition to the tools above, you will also need Node and Yarn installed for local development.
+
+To start the development server, the steps are the same as above, except run
+`make start_development` instead of `make start`, and run `make seed` instead
+of `make seed_container`.
+
+To run tests, run `make test`. To run the linter, run `make lint`.
