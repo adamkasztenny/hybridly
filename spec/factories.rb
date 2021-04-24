@@ -1,4 +1,10 @@
 FactoryBot.define do
+  factory :workstation do
+    location { "Engineering" }
+    capacity { 1 }
+    user { association :admin_user }
+  end
+
   factory :user do
     email { "hybridly@example.com" }
   end

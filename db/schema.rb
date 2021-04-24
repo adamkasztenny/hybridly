@@ -1,4 +1,16 @@
-ActiveRecord::Schema.define(version: 2021_04_18_175546) do
+# This file is auto-generated from the current state of the database. Instead
+# of editing this file, please use the migrations feature of Active Record to
+# incrementally modify your database, and then regenerate this schema definition.
+#
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
+# be faster and is potentially less error prone than running all of your
+# migrations from scratch. Old migrations may fail to apply correctly if those
+# migrations use external dependencies or application code.
+#
+# It's strongly recommended that you check this file into your version control system.
+
+ActiveRecord::Schema.define(version: 2021_04_24_172123) do
 
   create_table "reservation_policies", force: :cascade do |t|
     t.integer "office_limit", null: false
@@ -44,6 +56,16 @@ ActiveRecord::Schema.define(version: 2021_04_18_175546) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  create_table "workstations", force: :cascade do |t|
+    t.string "location"
+    t.integer "capacity"
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_workstations_on_user_id"
+  end
+
   add_foreign_key "reservation_policies", "users"
   add_foreign_key "reservations", "users"
+  add_foreign_key "workstations", "users"
 end
