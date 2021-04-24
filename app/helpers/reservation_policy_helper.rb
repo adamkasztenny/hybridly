@@ -1,11 +1,11 @@
 module ReservationPolicyHelper
-  def format_reservation_policy_count(office_limit)
-    if office_limit == 1
-      office_limit_count = "1 person is"
+  def format_reservation_policy_count(capacity)
+    if capacity == 1
+      capacity_count = "1 person is"
     else
-      office_limit_count = "#{office_limit} people are"
+      capacity_count = "#{capacity} people are"
     end
 
-    "A total of #{office_limit_count} allowed in the office"
+    "A total of #{capacity_count} allowed in the office"
   end
 end

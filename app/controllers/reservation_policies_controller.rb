@@ -10,7 +10,7 @@ class ReservationPoliciesController < ApplicationController
     @reservation_policy.user = User.find(session[:user_id])
 
     if @reservation_policy.save
-      flash.notice = "Policy updated to permit #{@reservation_policy.office_limit} people in the office"
+      flash.notice = "Policy updated to permit #{@reservation_policy.capacity} people in the office"
       redirect_to '/dashboard'
     else
       render :new
@@ -20,6 +20,6 @@ class ReservationPoliciesController < ApplicationController
   private
 
   def reservation_policy_parameters
-    params.require(:reservation_policy).permit(:office_limit)
+    params.require(:reservation_policy).permit(:capacity)
   end
 end

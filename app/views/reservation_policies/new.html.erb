@@ -5,9 +5,9 @@
 
   <%= form_with :html => {:class => "uk-form-horizontal"}, model: @reservation_policy do |form| %>
     <div>
-      <%= form.label :office_limit, :class => "uk-form-label" %><br>
+      <%= form.label :capacity, :class => "uk-form-label" %><br>
       <div class="uk-form-controls">
-        <%= form.number_field  :office_limit, :class=> "uk-input" %>
+        <%= form.number_field  :capacity, :class=> "uk-input" %>
       </div>
     </div>
 

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe "Dashboard", type: :feature do
   let!(:user) { create(:user) }
-  let!(:reservation_policy) { create(:reservation_policy, office_limit: 2) }
+  let!(:reservation_policy) { create(:reservation_policy, capacity: 2) }
   let!(:reservation) { create(:reservation, user: user) }
   let!(:other_reservation) { create(:reservation, user: create(:user, email: "other-hybridly@example.com")) }
 

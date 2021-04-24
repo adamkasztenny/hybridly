@@ -24,7 +24,7 @@ FactoryBot.define do
   end
 
   factory :reservation_policy do
-    office_limit { 1 }
+    capacity { 1 }
 
     user { association :admin_user }
   end

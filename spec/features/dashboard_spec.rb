@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe "Dashboard", type: :feature do
   let!(:user) { create(:user) }
-  let!(:reservation_policy) { create(:reservation_policy, office_limit: 3) }
+  let!(:reservation_policy) { create(:reservation_policy, capacity: 3) }
 
   before do
     Timecop.freeze(Time.parse('2022-01-01'))

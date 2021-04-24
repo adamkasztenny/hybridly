@@ -18,7 +18,7 @@ describe "Setting a reservation policy", type: :feature do
       click_on 'Update reservation policy'
       expect(page).to have_content "Edit Reservation Policy"
 
-      fill_in 'reservation_policy_office_limit', :with => 2
+      fill_in 'reservation_policy_capacity', :with => 2
       click_on "Update"
 
       expect(page).to have_content "Policy updated to permit 2 people in the office"
@@ -29,7 +29,7 @@ describe "Setting a reservation policy", type: :feature do
       click_on "Update"
 
       expect(page).not_to have_content "Policy updated"
-      expect(page).to have_content "Office limit can't be blank"
+      expect(page).to have_content "Capacity can't be blank"
     end
   end
 

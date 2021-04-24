@@ -11,9 +11,9 @@ else
   admin_user.add_role(:admin)
 end
 
-office_limit = 3
-Rails.logger.info "Creating default reservation policy with office limit #{office_limit}"
-ReservationPolicy.find_or_create_by!(user: admin_user, office_limit: office_limit)
+capacity = 3
+Rails.logger.info "Creating default reservation policy with capacity #{capacity}"
+ReservationPolicy.find_or_create_by!(user: admin_user, capacity: capacity)
 
 Rails.logger.info "Creating workstations"
 Workstation.find_or_create_by!(user: admin_user, location: "Engineering", capacity: 10)
