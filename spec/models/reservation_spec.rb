@@ -5,11 +5,20 @@ RSpec.describe Reservation, type: :model do
   let(:second_user) { create(:user, email: "hybridly-second@example.com") }
   let(:third_user) { create(:user, email: "hybridly-third@example.com") }
   let!(:reservation_policy) { create(:reservation_policy, capacity: 2) }
+  let!(:workspace) { create(:workspace, user: reservation_policy.user) }
 
-  it "can be valid" do
+  it "can be valid, without a workspace" do
     reservation = Reservation.new(date: Date.new(2022, 1, 1), user: user)
 
     expect(reservation).to be_valid
+    expect(reservation.workspace_id).to be nil
+  end
+
+  it "can be valid, with a workspace" do
+    reservation = Reservation.new(date: Date.new(2022, 1, 1), workspace_id: workspace.id, user: user)
+
+    expect(reservation).to be_valid
+    expect(reservation.workspace_id).to be workspace.id
   end
 
   it "does not allow the date to be nil" do
