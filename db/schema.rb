@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_25_162849) do
+ActiveRecord::Schema.define(version: 2021_04_25_165839) do
 
   create_table "reservation_policies", force: :cascade do |t|
     t.integer "capacity", null: false
@@ -56,18 +56,18 @@ ActiveRecord::Schema.define(version: 2021_04_25_162849) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
-  create_table "workstations", force: :cascade do |t|
+  create_table "workspaces", force: :cascade do |t|
     t.string "location"
     t.integer "capacity"
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "workstation_type"
-    t.index ["location", "workstation_type"], name: "index_workstations_on_location_and_workstation_type", unique: true
-    t.index ["user_id"], name: "index_workstations_on_user_id"
+    t.integer "workspace_type"
+    t.index ["location", "workspace_type"], name: "index_workspaces_on_location_and_workspace_type", unique: true
+    t.index ["user_id"], name: "index_workspaces_on_user_id"
   end
 
   add_foreign_key "reservation_policies", "users"
   add_foreign_key "reservations", "users"
-  add_foreign_key "workstations", "users"
+  add_foreign_key "workspaces", "users"
 end

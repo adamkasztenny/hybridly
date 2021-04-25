@@ -1,18 +1,18 @@
 <div class="uk-card uk-card-body">
-  <h1 class="uk-heading-small">Create Workstation</h1>
+  <h1 class="uk-heading-small">Create Workspace</h1>
 
   <h1 class="uk-heading-divider"></h1>
 
-  <%= form_with :html => {:class => "uk-form-horizontal"}, model: @workstation do |form| %>
+  <%= form_with :html => {:class => "uk-form-horizontal"}, model: @workspace do |form| %>
     <div>
       <%= form.label :location, :class => "uk-form-label" %><br>
       <div class="uk-form-controls">
         <%= form.text_field :location, :class=> "uk-input" %>
       </div>
 
-      <%= form.label :workstation_type, :class => "uk-form-label" %><br>
+      <%= form.label :workspace_type, :class => "uk-form-label" %><br>
       <div class="uk-form-controls">
-        <%= form.select :workstation_type, options_for_select(Workstation.workstation_types.keys.map {|workstation_type| [workstation_type.humanize.capitalize, workstation_type]}), :class => "uk-select" %>
+        <%= form.select :workspace_type, options_for_select(Workspace.workspace_types.keys.map {|workspace_type| [workspace_type.humanize.capitalize, workspace_type]}), :class => "uk-select" %>
       </div>
 
       <%= form.label :capacity, :class => "uk-form-label" %><br>
@@ -21,7 +21,7 @@
       </div>
     </div>
 
-    <%= render :partial => 'form_errors', locals: { model: @workstation } %>
+    <%= render :partial => 'form_errors', locals: { model: @workspace } %>
 
     <%= form.submit "Create", :class => "uk-button uk-button-primary" %>
   <% end %>

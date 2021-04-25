@@ -10,5 +10,5 @@ Rails.application.routes.draw do
   get '/reservations/:date' => 'reservations#show_for_date'
 
   resource :reservation_policies
-  resource :workstations
+  resource :workspaces
 end

@@ -38,7 +38,7 @@
 
             <% if User.find(session[:user_id]).has_role?(:admin) %>
                 <ul class="uk-navbar-nav">
-                    <li class="uk-active"><%= link_to 'Create Workstation', new_workstations_path %></li>
+                    <li class="uk-active"><%= link_to 'Create Workspace', new_workspaces_path %></li>
                 </ul>
             <% end %>
           </div>
