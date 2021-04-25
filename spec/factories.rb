@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :workspace do
     location { "Engineering" }
-    workspace_type { :desk }
+    workspace_type { :desks }
     capacity { 1 }
     user { association :admin_user }
   end

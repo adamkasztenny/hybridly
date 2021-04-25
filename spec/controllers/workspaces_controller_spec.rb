@@ -4,7 +4,7 @@ RSpec.describe WorkspacesController do
   let!(:admin_user) { create(:admin_user) }
   let(:location) { "Sales" }
   let(:capacity) { 25 }
-  let(:workspace_type) { "desk" }
+  let(:workspace_type) { "desks" }
 
   before do
     session[:user_id] = admin_user.id
@@ -46,8 +46,8 @@ RSpec.describe WorkspacesController do
            :params => { :workspace => { :location => location, :workspace_type => workspace_type,
                                         :capacity => capacity } }
 
-      expect(Workspace.first.workspace_type).to eq("desk")
-      expect(Workspace.first.desk?).to be true
+      expect(Workspace.first.workspace_type).to eq("desks")
+      expect(Workspace.first.desks?).to be true
     end
 
     it 'saves the admin_user who created the workspace' do
