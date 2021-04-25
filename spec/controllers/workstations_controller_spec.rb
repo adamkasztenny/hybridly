@@ -4,7 +4,7 @@ RSpec.describe WorkstationsController do
   let!(:admin_user) { create(:admin_user) }
   let(:location) { "Sales" }
   let(:capacity) { 25 }
-  let(:workstation_type) { :desk }
+  let(:workstation_type) { "desk" }
 
   before do
     session[:user_id] = admin_user.id

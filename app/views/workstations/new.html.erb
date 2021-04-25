@@ -10,6 +10,11 @@
         <%= form.text_field :location, :class=> "uk-input" %>
       </div>
 
+      <%= form.label :workstation_type, :class => "uk-form-label" %><br>
+      <div class="uk-form-controls">
+        <%= form.select :workstation_type, options_for_select(Workstation.workstation_types.keys.map {|workstation_type| [workstation_type.humanize.capitalize, workstation_type]}), :class => "uk-select" %>
+      </div>
+
       <%= form.label :capacity, :class => "uk-form-label" %><br>
       <div class="uk-form-controls">
         <%= form.number_field  :capacity, :class=> "uk-input" %>
