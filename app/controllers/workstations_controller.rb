@@ -7,6 +7,8 @@ class WorkstationsController < ApplicationController
 
   def create
     if !workstation_type_valid?(workstation_parameters)
+      @workstation = Workstation.new
+      @workstation.errors.add(:workstation_type, "is not valid")
       render :new
       return
     end
@@ -30,6 +32,6 @@ class WorkstationsController < ApplicationController
 
   def workstation_type_valid?(workstation_parameters)
     workstation_type = workstation_parameters[:workstation_type]
-    Workstation.workstation_types.keys.include?(workstation_type.to_s)
+    Workstation.workstation_types.keys.include?(workstation_type)
   end
 end
