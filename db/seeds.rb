@@ -16,9 +16,9 @@ Rails.logger.info "Creating default reservation policy with capacity #{capacity}
 ReservationPolicy.find_or_create_by!(user: admin_user, capacity: capacity)
 
 Rails.logger.info "Creating workspaces"
-Workspace.find_or_create_by!(user: admin_user, location: "Engineering", workspace_type: :desk, capacity: 5)
-Workspace.find_or_create_by!(user: admin_user, location: "HR", workspace_type: :desk, capacity: 5)
-Workspace.find_or_create_by!(user: admin_user, location: "Sales", workspace_type: :desk, capacity: 10)
+Workspace.find_or_create_by!(user: admin_user, location: "Engineering", workspace_type: :desks, capacity: 5)
+Workspace.find_or_create_by!(user: admin_user, location: "HR", workspace_type: :desks, capacity: 5)
+Workspace.find_or_create_by!(user: admin_user, location: "Sales", workspace_type: :desks, capacity: 10)
 Workspace.find_or_create_by!(user: admin_user, location: "Board Room", workspace_type: :meeting_room, capacity: 5)
 
 Rails.logger.info "Creating other users"

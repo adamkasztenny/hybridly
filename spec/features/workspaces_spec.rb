@@ -19,7 +19,7 @@ describe "Creating a workspace", type: :feature do
       expect(page).to have_content "Create Workspace"
 
       fill_in 'workspace_location', :with => 'Engineering'
-      select 'Desk', :from => 'workspace_workspace_type'
+      select 'Desks', :from => 'workspace_workspace_type'
       fill_in 'workspace_capacity', :with => 5
       click_on "Create"
 
@@ -42,7 +42,7 @@ describe "Creating a workspace", type: :feature do
       click_on 'Create Workspace'
 
       fill_in 'workspace_capacity', :with => 5
-      select 'Desk', :from => 'workspace_workspace_type'
+      select 'Desks', :from => 'workspace_workspace_type'
       click_on "Create"
 
       expect(page).not_to have_content "Engineering workspace created"
@@ -53,7 +53,7 @@ describe "Creating a workspace", type: :feature do
       click_on 'Create Workspace'
 
       fill_in 'workspace_location', :with => 'Engineering'
-      select 'Desk', :from => 'workspace_workspace_type'
+      select 'Desks', :from => 'workspace_workspace_type'
       click_on "Create"
 
       expect(page).not_to have_content "Engineering workspace created"

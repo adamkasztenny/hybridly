@@ -1,7 +1,7 @@
 class Workspace < ApplicationRecord
   include UserValidations
 
-  enum workspace_type: [:desk, :meeting_room]
+  enum workspace_type: [:desks, :meeting_room]
 
   belongs_to :user
   validates :capacity, presence: true, numericality: { greater_than_or_equal_to: 0 }
