@@ -36,6 +36,14 @@ RSpec.describe Workstation, workstation_type: :model do
     expect(second_workstation).to be_valid
   end
 
+  it "is invalid if a workstation with the same location and type already exists" do
+    Workstation.create!(location: "HR Office", workstation_type: :desk, capacity: 5, user: admin_user)
+    workstation = Workstation.new(location: "HR Office", workstation_type: :desk, capacity: 5, user: admin_user)
+
+    expect(workstation).not_to be_valid
+    expect(workstation.errors.full_messages).to eq(["Location with type desk already exists"])
+  end
+
   it "is invalid if the capacity is nil" do
     workstation = Workstation.new(location: "HR Office", workstation_type: :desk, user: admin_user)
 

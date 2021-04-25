@@ -16,9 +16,10 @@ Rails.logger.info "Creating default reservation policy with capacity #{capacity}
 ReservationPolicy.find_or_create_by!(user: admin_user, capacity: capacity)
 
 Rails.logger.info "Creating workstations"
-Workstation.find_or_create_by!(user: admin_user, location: "Engineering", capacity: 10)
-Workstation.find_or_create_by!(user: admin_user, location: "HR", capacity: 5)
-Workstation.find_or_create_by!(user: admin_user, location: "Sales", capacity: 20)
+Workstation.find_or_create_by!(user: admin_user, location: "Engineering", workstation_type: :desk, capacity: 5)
+Workstation.find_or_create_by!(user: admin_user, location: "HR", workstation_type: :desk, capacity: 5)
+Workstation.find_or_create_by!(user: admin_user, location: "Sales", workstation_type: :desk, capacity: 10)
+Workstation.find_or_create_by!(user: admin_user, location: "Board Room", workstation_type: :meeting_room, capacity: 5)
 
 Rails.logger.info "Creating other users"
 violette = User.find_or_create_by!(:email => "violette@example.com")
