@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_24_180937) do
+ActiveRecord::Schema.define(version: 2021_04_25_150031) do
 
   create_table "reservation_policies", force: :cascade do |t|
     t.integer "capacity", null: false
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 2021_04_24_180937) do
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "workstation_type"
     t.index ["user_id"], name: "index_workstations_on_user_id"
   end
 
