@@ -14,21 +14,41 @@ describe "Creating a workstation", type: :feature do
       expect(page).to have_link("Create Workstation")
     end
 
-    it "allows the admin to create a workstation" do
+    it "allows the admin to create a workstation with desks" do
+      pending
+
       click_on 'Create Workstation'
       expect(page).to have_content "Create Workstation"
 
       fill_in 'workstation_location', :with => 'Engineering'
+      fill_in 'workstation_type', :with => 'Desk'
       fill_in 'workstation_capacity', :with => 5
       click_on "Create"
 
       expect(page).to have_content "Engineering workstation created with a capacity of 5 people"
     end
 
+    it "allows the admin to create a workstation that is a meeting room" do
+      pending
+
+      click_on 'Create Workstation'
+      expect(page).to have_content "Create Workstation"
+
+      fill_in 'workstation_location', :with => 'Board Room'
+      fill_in 'workstation_type', :with => 'Meeting Room'
+      fill_in 'workstation_capacity', :with => 10
+      click_on "Create"
+
+      expect(page).to have_content "Board room workstation created with a capacity of 10 people"
+    end
+
     it "displays an error message if the location is blank" do
+      pending
+
       click_on 'Create Workstation'
 
       fill_in 'workstation_capacity', :with => 5
+      fill_in 'workstation_type', :with => 'Desk'
       click_on "Create"
 
       expect(page).not_to have_content "Engineering workstation created"
@@ -36,13 +56,29 @@ describe "Creating a workstation", type: :feature do
     end
 
     it "displays an error message if the capacity is not provided" do
+      pending
+
       click_on 'Create Workstation'
 
       fill_in 'workstation_location', :with => 'Engineering'
+      fill_in 'workstation_type', :with => 'Desk'
       click_on "Create"
 
       expect(page).not_to have_content "Engineering workstation created"
       expect(page).to have_content "Capacity can't be blank"
+    end
+
+    it "displays an error message if the type is not provided" do
+      pending
+
+      click_on 'Create Workstation'
+
+      fill_in 'workstation_location', :with => 'Board Room'
+      fill_in 'workstation_capacity', :with => 10
+      click_on "Create"
+
+      expect(page).not_to have_content "Engineering workstation created"
+      expect(page).to have_content "Type can't be blank"
     end
   end
 
