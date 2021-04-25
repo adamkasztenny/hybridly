@@ -1,5 +1,7 @@
 class Reservation < ApplicationRecord
   belongs_to :user
+  references :workspace
+
   validates :date, presence: true
 
   validates_uniqueness_of :user_id, :scope => :date, :message => ->(object, data) do
