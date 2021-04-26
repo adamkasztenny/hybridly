@@ -88,33 +88,4 @@ RSpec.describe Workspace, workspace_type: :model do
     expect(workspace).not_to be_valid
     expect(workspace.errors.full_messages).to eq(["Workspace type can't be blank"])
   end
-
-  context ".spots_remaining" do
-    let!(:workspace) {
-      Workspace.create!(location: "HR", workspace_type: :desks, capacity: 3, user: admin_user)
-    }
-    let!(:second_user) { create(:user, email: "hybridly-second@example.com") }
-    let!(:third_user) { create(:user, email: "hybridly-third@example.com") }
-    let!(:reservation_policy) { create(:reservation_policy, user: admin_user, capacity: 5) }
-    let(:date) { Date.today }
-
-    it "returns the capacity if no reservations have been made with the workspace for the date" do
-      expect(workspace.spots_remaining(date)).to be 3
-    end
-
-    it "returns the spots remaining if reservations have been booked with the workspace for the date" do
-      create(:reservation, workspace: workspace, date: date)
-      create(:reservation, workspace: workspace, date: date, user: second_user)
-
-      expect(workspace.spots_remaining(date)).to be 1
-    end
-
-    it "returns zero if the number of reservations made with the workspace equals its capcity for the date" do
-      create(:reservation, workspace: workspace, date: date)
-      create(:reservation, workspace: workspace, date: date, user: second_user)
-      create(:reservation, workspace: workspace, date: date, user: third_user)
-
-      expect(workspace.spots_remaining(date)).to be 0
-    end
-  end
 end
