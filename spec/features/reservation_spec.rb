@@ -25,23 +25,18 @@ describe "Reserving a spot in the office", type: :feature do
   end
 
   it "displays all workspaces and their current capacities" do
-    pending
-
     click_on 'Reserve time in the office'
 
-    expect(page).to have_select('workspace',
-                                :options => ['Engineering (desks, 1 spot left)',
-                                             'Board Room (meeting room, 5 spots left)'])
+    expect(page).to have_select('reservation_workspace_id',
+                                :options => ['Select a Workspace', 'Engineering', 'Board Room'])
   end
 
   it "allows the user to pick a date to go to the office and reserve a workspace" do
-    pending
-
     click_on 'Reserve time in the office'
     expect(page).to have_content "New Reservation"
 
     fill_in 'reservation_date', :with => '2022-01-01'
-    select 'Engineering (desks, 1 spot left)', :from => 'workspace'
+    select 'Engineering', :from => 'reservation_workspace_id'
     click_on "Create Reservation"
 
     expect(page).to have_content "Reservation for 2022-01-01 successful!"
