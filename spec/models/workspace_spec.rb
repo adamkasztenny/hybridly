@@ -89,39 +89,32 @@ RSpec.describe Workspace, workspace_type: :model do
     expect(workspace.errors.full_messages).to eq(["Workspace type can't be blank"])
   end
 
-  context ".spots_remaining_for_today" do
+  context ".spots_remaining" do
     let!(:workspace) {
       Workspace.create!(location: "HR", workspace_type: :desks, capacity: 3, user: admin_user)
     }
     let!(:second_user) { create(:user, email: "hybridly-second@example.com") }
     let!(:third_user) { create(:user, email: "hybridly-third@example.com") }
     let!(:reservation_policy) { create(:reservation_policy, user: admin_user, capacity: 5) }
-     
-    before do
-      Timecop.freeze(DateTime.new(2022, 1, 2, 14, 55))
+    let(:date) { Date.today }
+
+    it "returns the capacity if no reservations have been made with the workspace for the date" do
+      expect(workspace.spots_remaining(date)).to be 3
     end
 
-    after do
-      Timecop.return
+    it "returns the spots remaining if reservations have been booked with the workspace for the date" do
+      create(:reservation, workspace: workspace, date: date)
+      create(:reservation, workspace: workspace, date: date, user: second_user)
+
+      expect(workspace.spots_remaining(date)).to be 1
     end
 
-    it "returns the capacity if no reservations have been made with the workspace" do
-      expect(workspace.spots_remaining_for_today).to be 3
-    end
+    it "returns zero if the number of reservations made with the workspace equals its capcity for the date" do
+      create(:reservation, workspace: workspace, date: date)
+      create(:reservation, workspace: workspace, date: date, user: second_user)
+      create(:reservation, workspace: workspace, date: date, user: third_user)
 
-    it "returns the spots remaining if reservations have been booked with the workspace" do
-      create(:reservation, workspace: workspace, date: Date.today)
-      create(:reservation, workspace: workspace, date: Date.today, user: second_user)
-
-      expect(workspace.spots_remaining_for_today).to be 1
-    end
-
-    it "returns zero if the number of reservations made with the workspace equals its capcity" do
-      create(:reservation, workspace: workspace, date: Date.today)
-      create(:reservation, workspace: workspace, date: Date.today, user: second_user)
-      create(:reservation, workspace: workspace, date: Date.today, user: third_user)
-
-      expect(workspace.spots_remaining_for_today).to be 0
+      expect(workspace.spots_remaining(date)).to be 0
     end
   end
 end
