@@ -14,6 +14,7 @@ RSpec.describe ReservationsController do
 
   context 'creating a new reservation successfully' do
     let(:date) { '2023-01-01' }
+    let(:workspace) { create(:workspace, user: reservation_policy.user) }
 
     it 'saves the reservation' do
       expect(Reservation.first).to be nil
@@ -33,6 +34,18 @@ RSpec.describe ReservationsController do
       post :create, :params => { :reservation => { :date => date } }
 
       expect(Reservation.first.user).to eq(user)
+    end
+
+    it 'does not saves the workspace if no ID is provided' do
+      post :create, :params => { :reservation => { :date => date } }
+
+      expect(Reservation.first.workspace).to be nil
+    end
+
+    it 'does saves the workspace if its ID is provided' do
+      post :create, :params => { :reservation => { :date => date, :workspace_id => workspace.id } }
+
+      expect(Reservation.first.workspace).to eq(workspace)
     end
 
     it 'includes a successful flash message' do
