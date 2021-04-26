@@ -14,4 +14,9 @@ class Workspace < ApplicationRecord
   end
 
   validate :user_must_be_an_admin
+
+  def spots_remaining_for_today
+    spots_used = Reservation.where(date: Date.today, workspace_id: id).count
+    capacity - spots_used
+  end
 end
