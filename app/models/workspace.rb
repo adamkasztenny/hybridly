@@ -1,6 +1,8 @@
 class Workspace < ApplicationRecord
   include UserValidations
 
+  has_many :reservations
+
   enum workspace_type: [:desks, :meeting_room]
 
   belongs_to :user

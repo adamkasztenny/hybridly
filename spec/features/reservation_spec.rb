@@ -6,7 +6,9 @@ describe "Reserving a spot in the office", type: :feature do
   let!(:admin_user) { create(:admin_user) }
   let!(:reservation_policy) { create(:reservation_policy, user: admin_user) }
   let!(:first_workspace) { create(:workspace, user: admin_user) }
-  let!(:second_workspace) { create(:workspace, location: 'Board Room', workspace_type: :meeting_room, capacity: 5, user: admin_user) }
+  let!(:second_workspace) {
+    create(:workspace, location: 'Board Room', workspace_type: :meeting_room, capacity: 5, user: admin_user)
+  }
 
   before :each do
     login_as(user.email)
@@ -27,7 +29,9 @@ describe "Reserving a spot in the office", type: :feature do
 
     click_on 'Reserve time in the office'
 
-    expect(page).to have_select('workspace', :options => ['Engineering (desks, 1 spot left)', 'Board Room (meeting room, 5 spots left)'])
+    expect(page).to have_select('workspace',
+                                :options => ['Engineering (desks, 1 spot left)',
+                                             'Board Room (meeting room, 5 spots left)'])
   end
 
   it "allows the user to pick a date to go to the office and reserve a workspace" do
