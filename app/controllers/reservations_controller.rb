@@ -25,6 +25,6 @@ class ReservationsController < ApplicationController
   private
 
   def reservation_parameters
-    params.require(:reservation).permit(:date)
+    params.require(:reservation).permit(:date, :workspace_id)
   end
 end
