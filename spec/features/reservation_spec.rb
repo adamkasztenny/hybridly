@@ -3,11 +3,11 @@ require 'rails_helper'
 describe "Reserving a spot in the office", type: :feature do
   let!(:user) { create(:user) }
   let!(:other_user) { create(:user, email: "hybridly-other@example.com") }
-  let!(:admin_user) { create(:admin_user) }
-  let!(:reservation_policy) { create(:reservation_policy, user: admin_user) }
-  let!(:first_workspace) { create(:workspace, user: admin_user) }
+  let!(:reservation_policy) { create(:reservation_policy) }
+  let!(:first_workspace) { create(:workspace, user: reservation_policy.user) }
   let!(:second_workspace) {
-    create(:workspace, location: 'Board Room', workspace_type: :meeting_room, capacity: 5, user: admin_user)
+    create(:workspace, location: 'Board Room', workspace_type: :meeting_room, capacity: 5,
+                       user: reservation_policy.user)
   }
 
   before :each do
