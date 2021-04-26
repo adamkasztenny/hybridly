@@ -9,6 +9,11 @@
       <div class="uk-form-controls">
         <%= form.date_field :date, :class=> "uk-input" %>
       </div>
+
+      <%= form.label :workspace, :class => "uk-form-label" %>
+      <div class="uk-form-controls">
+        <%= form.collection_select(:workspace_id, Workspace.all, :id, :location, { :prompt => 'Select a Workspace', :selected => @reservation.workspace}, { class: 'uk-select' }) %>
+      </div>
     </div>
 
     <%= render :partial => 'form_errors', locals: { model: @reservation } %>
