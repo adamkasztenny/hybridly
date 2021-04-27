@@ -14,4 +14,8 @@ class Workspace < ApplicationRecord
   end
 
   validate :user_must_be_an_admin
+
+  def exceeds_capacity?(number_of_reservations)
+    capacity < number_of_reservations
+  end
 end

@@ -88,4 +88,16 @@ RSpec.describe Workspace, workspace_type: :model do
     expect(workspace).not_to be_valid
     expect(workspace.errors.full_messages).to eq(["Workspace type can't be blank"])
   end
+
+  context ".exceeds_capacity?" do
+    let(:workspace) { Workspace.create!(location: "HR Office", workspace_type: :desks, capacity: 5, user: admin_user) }
+
+    it "returns true if the number of reservations exceed the capacity" do
+      expect(workspace.exceeds_capacity?(50)).to be true
+    end
+
+    it "returns false if the number of reservations do not exceed the capacity" do
+      expect(workspace.exceeds_capacity?(3)).to be false
+    end
+  end
 end
