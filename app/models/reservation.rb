@@ -28,9 +28,9 @@ class Reservation < ApplicationRecord
   private
 
   def does_not_exceed_office_capacity
-    office_is_fully_booked = ReservationPolicy.current.capacity < reservations_for({ :date => date })
+    number_of_reservations = reservations_for({ :date => date })
 
-    if office_is_fully_booked
+    if ReservationPolicy.exceeds_current_capacity?(number_of_reservations)
       errors.add(:capacity, "has been reached for #{date}")
     end
   end
