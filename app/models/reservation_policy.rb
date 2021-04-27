@@ -9,4 +9,8 @@ class ReservationPolicy < ApplicationRecord
   def self.current
     ReservationPolicy.order(:created_at).last
   end
+
+  def self.exceeds_current_capacity?(number_of_reservations)
+    self.current.capacity < number_of_reservations
+  end
 end
