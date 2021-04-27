@@ -65,7 +65,7 @@ RSpec.describe Reservation, type: :model do
     expect(second_reservation.errors.full_messages).to eq(["Workspace capacity has been reached for 2022-01-01"])
   end
 
-  it "does allow the user to book the date if the booking does not exceed the capacity" +
+  it "does allow the user to book the date if the booking does not exceed the office capacity" +
      "and no workspace has been chosen" do
     first_resevation = Reservation.create!(date: Date.new(2022, 1, 1), workspace: workspace, user: user)
     expect(first_resevation).to be_valid
