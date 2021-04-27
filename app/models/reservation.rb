@@ -40,9 +40,9 @@ class Reservation < ApplicationRecord
       return
     end
 
-    workspace_is_fully_booked = workspace.capacity < reservations_for({ :date => date, :workspace => workspace })
+    number_of_reservations = reservations_for({ :date => date, :workspace => workspace })
 
-    if workspace_is_fully_booked
+    if workspace.exceeds_capacity?(number_of_reservations)
       errors.add(:workspace, "capacity has been reached for #{date}")
     end
   end
