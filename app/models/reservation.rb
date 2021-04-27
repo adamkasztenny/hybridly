@@ -8,7 +8,8 @@ class Reservation < ApplicationRecord
     "has already reserved #{object.date}"
   end
 
-  validate :does_not_exceed_capacity
+  validate :does_not_exceed_office_capacity
+  validate :does_not_exceed_workspace_capacity
 
   def self.reservations_per_day
     Reservation.group(:date).count(:date)
@@ -26,7 +27,7 @@ class Reservation < ApplicationRecord
 
   private
 
-  def does_not_exceed_capacity
+  def does_not_exceed_office_capacity
     office_is_fully_booked = ReservationPolicy.current.capacity < reservations_for(date)
 
     if office_is_fully_booked
@@ -34,8 +35,29 @@ class Reservation < ApplicationRecord
     end
   end
 
+  def does_not_exceed_workspace_capacity
+    if workspace.nil?
+      return
+    end
+
+    workspace_is_fully_booked = workspace.capacity < reservations_with_workspaces_for(date, workspace)
+
+    if workspace_is_fully_booked
+      errors.add(:workspace, "capacity has been reached for #{date}")
+    end
+  end
+
   def reservations_for(date)
     number_of_reservations = Reservation.where(date: date).count
+    if self.new_record?
+      number_of_reservations += 1
+    end
+
+    number_of_reservations
+  end
+
+  def reservations_with_workspaces_for(date, workspace)
+    number_of_reservations = Reservation.where(date: date, workspace: workspace).count
     if self.new_record?
       number_of_reservations += 1
     end
