@@ -84,8 +84,6 @@ describe "Reserving a spot in the office", type: :feature do
   end
 
   it "does not allow users to reserve a spot with a workspace if the workspace capacity has been reached for that date" do
-    pending
-
     reservation_policy.update!(capacity: 5)
 
     click_on 'Reserve time in the office'
