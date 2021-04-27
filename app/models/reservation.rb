@@ -28,7 +28,7 @@ class Reservation < ApplicationRecord
   private
 
   def does_not_exceed_office_capacity
-    office_is_fully_booked = ReservationPolicy.current.capacity < reservations_for(date)
+    office_is_fully_booked = ReservationPolicy.current.capacity < reservations_for({ :date => date })
 
     if office_is_fully_booked
       errors.add(:capacity, "has been reached for #{date}")
@@ -40,24 +40,15 @@ class Reservation < ApplicationRecord
       return
     end
 
-    workspace_is_fully_booked = workspace.capacity < reservations_with_workspaces_for(date, workspace)
+    workspace_is_fully_booked = workspace.capacity < reservations_for({ :date => date, :workspace => workspace })
 
     if workspace_is_fully_booked
       errors.add(:workspace, "capacity has been reached for #{date}")
     end
   end
 
-  def reservations_for(date)
-    number_of_reservations = Reservation.where(date: date).count
-    if self.new_record?
-      number_of_reservations += 1
-    end
-
-    number_of_reservations
-  end
-
-  def reservations_with_workspaces_for(date, workspace)
-    number_of_reservations = Reservation.where(date: date, workspace: workspace).count
+  def reservations_for(filters)
+    number_of_reservations = Reservation.where(filters).count
     if self.new_record?
       number_of_reservations += 1
     end
