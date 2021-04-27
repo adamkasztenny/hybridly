@@ -24,7 +24,7 @@ describe "Reserving a spot in the office", type: :feature do
     expect(page).to have_content "Reservation for 2022-01-01 successful!"
   end
 
-  it "displays all workspaces and their current capacities" do
+  it "displays all workspaces" do
     click_on 'Reserve time in the office'
 
     expect(page).to have_select('reservation_workspace_id',
