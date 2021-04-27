@@ -83,7 +83,8 @@ describe "Reserving a spot in the office", type: :feature do
     expect(page).to have_content "Capacity has been reached for 2022-01-01"
   end
 
-  it "does not allow users to reserve a spot with a workspace if the workspace capacity has been reached for that date" do
+  it "does not allow users to reserve a spot with a workspace if the " +
+     "workspace capacity has been reached for that date" do
     reservation_policy.update!(capacity: 5)
 
     click_on 'Reserve time in the office'

@@ -65,6 +65,15 @@ RSpec.describe Reservation, type: :model do
     expect(second_reservation.errors.full_messages).to eq(["Workspace capacity has been reached for 2022-01-01"])
   end
 
+  it "does allow the user to book the date if the booking does not exceed the capacity" +
+     "and no workspace has been chosen" do
+    first_resevation = Reservation.create!(date: Date.new(2022, 1, 1), workspace: workspace, user: user)
+    expect(first_resevation).to be_valid
+
+    second_reservation = Reservation.new(date: Date.new(2022, 1, 1), user: second_user)
+    expect(second_reservation).to be_valid
+  end
+
   context ".reservations_per_day" do
     it "returns an empty hash if there are no reservations" do
       expect(Reservation.reservations_per_day).to eq({})
