@@ -4,6 +4,15 @@
 
   <h1 class="uk-heading-divider"></h1>
 
+  <h1 class="uk-heading-small">Average Reservations Per Day</h1>
+  <div class="uk-animation-toggle" tabindex="0">
+      <div class="uk-card uk-card-default uk-card-body uk-animation-fade">
+	  <h1 class="uk-heading-small"><%= "%.2f" % @average_reservations_per_day %></h1>
+      </div>
+  </div>
+
+  <h1 class="uk-heading-divider"></h1>
+
   <h1 class="uk-heading-small">Reservations Per Day</h1>
-  <%= line_chart @reservations_per_day %>
+  <%= line_chart @all_reservations_per_day %>
 </div>
