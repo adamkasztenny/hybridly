@@ -5,7 +5,9 @@ describe "Dashboard", type: :feature do
   let!(:reservation_policy) { create(:reservation_policy, capacity: 3) }
 
   let!(:engineering) { create(:workspace, location: "Engineering", user: reservation_policy.user) }
-  let!(:board_room) { create(:workspace, location: "Board Room", user: reservation_policy.user) }
+  let!(:board_room) {
+    create(:workspace, location: "Board Room", workspace_type: :meeting_room, user: reservation_policy.user)
+  }
 
   let!(:reservation) { create(:reservation, user: user, workspace: engineering) }
   let!(:second_reservation) {
@@ -41,8 +43,6 @@ describe "Dashboard", type: :feature do
   end
 
   it "allows the user to click a day on the calendar and the see where people are working" do
-    pending
-
     login_as(user.email)
 
     click_on "3 people in the office"
