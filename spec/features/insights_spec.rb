@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Metrics", type: :feature do
+describe "Insights", type: :feature do
   let!(:user) { create(:user) }
   let!(:reservation_policy) { create(:reservation_policy, capacity: 3) }
 
@@ -25,9 +25,9 @@ describe "Metrics", type: :feature do
   it "allows the user to view a line chart with the number of reservations per day" do
     login_as(user.email)
 
-    click_on "Metrics"
+    click_on "Insights"
 
-    expect(page).to have_content "Metrics"
+    expect(page).to have_content "Insights"
     expect(page).to have_content "Reservations Per Day"
 
     expect(page).to have_content('new Chartkick["LineChart"]')
