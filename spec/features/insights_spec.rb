@@ -27,7 +27,6 @@ describe "Insights", type: :feature do
 
     click_on "Insights"
 
-    expect(page).to have_content "Insights"
     expect(page).to have_content "Reservations Per Day"
 
     expect(page).to have_content('new Chartkick["LineChart"]')
@@ -37,5 +36,16 @@ describe "Insights", type: :feature do
     expect(page).to have_content "2022-01-03"
     expect(page).to have_content "2022-01-04"
     expect(page).to have_content "2022-01-05"
+  end
+
+  it "allows the user to view the average number of reservations per day" do
+    pending
+
+    login_as(user.email)
+
+    click_on "Insights"
+
+    expect(page).to have_content "Average Reservations Per Day"
+    expect(page).to have_content "0.6"
   end
 end
