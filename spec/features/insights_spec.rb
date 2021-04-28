@@ -39,13 +39,11 @@ describe "Insights", type: :feature do
   end
 
   it "allows the user to view the average number of reservations per day" do
-    pending
-
     login_as(user.email)
 
     click_on "Insights"
 
     expect(page).to have_content "Average Reservations Per Day"
-    expect(page).to have_content "0.6"
+    expect(page).to have_content "0.60"
   end
 end
