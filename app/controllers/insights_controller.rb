@@ -1,4 +1,4 @@
-class MetricsController < ApplicationController
+class InsightsController < ApplicationController
   include Secured
 
   def show

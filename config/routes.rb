@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get '/authentication/failure' => 'authentication#failure'
 
   get '/dashboard' => 'dashboard#show'
-  get '/metrics' => 'metrics#show'
+  get '/insights' => 'insights#show'
 
   resource :reservations
   get '/reservations/:date' => 'reservations#show_for_date'
