@@ -18,6 +18,7 @@ gem "rolify"
 
 gem "simple_calendar", "~> 2.4"
 gem "chartkick"
+gem 'groupdate'
 
 gem 'bootsnap', '>= 1.4.4', require: false
 
