@@ -6,7 +6,7 @@
   <h3><%= format_reservation_count(@reservations.size) %>:</h3>
   <ul class="uk-list uk-list-square">
     <% @reservations.each do |reservation| %>
-      <li><%= reservation.user.email %></li>
+      <li><%= "#{reservation.user.email} #{format_workspace_location(reservation.workspace)}" %></li>
     <% end %>
   </ul>
 </div>
