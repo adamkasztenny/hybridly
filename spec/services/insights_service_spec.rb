@@ -121,4 +121,40 @@ RSpec.describe InsightsService do
       expect(InsightsService.average_reservations_per_day).to eq(0.5714285714285714)
     end
   end
+
+  context ".number_of_reservations_available" do
+    it "returns zero if there are no reservations" do
+      expect(InsightsService.number_of_reservations_available).to be 0
+    end
+
+    it "returns the office capacity if there is one reservation" do
+      create(:reservation, date: Date.new(2022, 1, 1))
+
+      expect(InsightsService.number_of_reservations_available).to be 2
+    end
+
+    it "returns the office capacity if there are two reservations on the same day by different users" do
+      create(:reservation, date: Date.new(2022, 1, 1))
+      create(:reservation, user: second_user, date: Date.new(2022, 1, 1))
+
+      expect(InsightsService.number_of_reservations_available).to be 2
+    end
+
+    it "returns the total available spots across all days if there are two reservations on different days" +
+       "by different users" do
+      create(:reservation, date: Date.new(2022, 1, 1))
+      create(:reservation, user: second_user, date: Date.new(2022, 1, 2))
+
+      expect(InsightsService.number_of_reservations_available).to be 4
+    end
+
+    it "returns total available spots across all days, ending with the last day with a reservation" do
+      first_reservation = create(:reservation, date: Date.new(2022, 1, 1))
+      create(:reservation, user: first_reservation.user, date: Date.new(2022, 1, 2))
+      create(:reservation, user: second_user, date: Date.new(2022, 1, 1))
+      create(:reservation, user: second_user, date: Date.new(2022, 1, 7))
+
+      expect(InsightsService.number_of_reservations_available).to be 14
+    end
+  end
 end
