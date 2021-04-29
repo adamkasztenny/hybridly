@@ -46,4 +46,19 @@ describe "Insights", type: :feature do
     expect(page).to have_content "Average Reservations Per Day"
     expect(page).to have_content "0.60"
   end
+
+  it "allows the user to view a pie chart with the total number of reservations and the total number of" +
+     " reservations available" do
+    pending
+
+    login_as(user.email)
+
+    click_on "Insights"
+
+    expect(page).to have_content "Reservations Used vs Available"
+
+    expect(page).to have_content('new Chartkick["Pie Chart"]')
+    expect(page).to have_content('Reservations Used: 3')
+    expect(page).to have_content('Reservations Available: 15')
+  end
 end
