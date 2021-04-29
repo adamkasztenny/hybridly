@@ -6,4 +6,12 @@ class InsightsService
   def self.number_of_reservations
     self.all_reservations_per_day.values.sum
   end
+
+  def self.average_reservations_per_day
+    if self.all_reservations_per_day.empty?
+      return 0
+    end
+
+    self.number_of_reservations / self.all_reservations_per_day.size.to_f
+  end
 end
