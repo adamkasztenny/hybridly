@@ -31,11 +31,11 @@ describe "Insights", type: :feature do
 
     expect(page).to have_content('new Chartkick["LineChart"]')
 
-    expect(page).to have_content "2022-01-01"
-    expect(page).to have_content "2022-01-02"
-    expect(page).to have_content "2022-01-03"
-    expect(page).to have_content "2022-01-04"
-    expect(page).to have_content "2022-01-05"
+    expect(page).to have_content '2022-01-01'
+    expect(page).to have_content '2022-01-02'
+    expect(page).to have_content '2022-01-03'
+    expect(page).to have_content '2022-01-04'
+    expect(page).to have_content '2022-01-05'
   end
 
   it "allows the user to view the average number of reservations per day" do
@@ -49,16 +49,14 @@ describe "Insights", type: :feature do
 
   it "allows the user to view a pie chart with the total number of reservations and the total number of" +
      " reservations available" do
-    pending
-
     login_as(user.email)
 
     click_on "Insights"
 
     expect(page).to have_content "Reservations Used vs Available"
 
-    expect(page).to have_content('new Chartkick["Pie Chart"]')
-    expect(page).to have_content('Reservations Used: 3')
-    expect(page).to have_content('Reservations Available: 15')
+    expect(page).to have_content('new Chartkick["PieChart"]')
+    expect(page).to have_content('"Used",3')
+    expect(page).to have_content('"Available",15')
   end
 end
