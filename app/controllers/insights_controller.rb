@@ -6,7 +6,6 @@ class InsightsController < ApplicationController
     @number_of_reservations = InsightsService.number_of_reservations
     @average_reservations_per_day = InsightsService.average_reservations_per_day
     @reservations_used_vs_available = { :Used => @number_of_reservations,
-                                        :Available =>
-    @all_reservations_per_day.size * ReservationPolicy.current.capacity }
+                                        :Available => InsightsService.number_of_reservations_available }
   end
 end

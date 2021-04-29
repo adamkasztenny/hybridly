@@ -14,4 +14,8 @@ class InsightsService
 
     self.number_of_reservations / self.all_reservations_per_day.size.to_f
   end
+
+  def self.number_of_reservations_available
+    self.all_reservations_per_day.size * ReservationPolicy.current.capacity
+  end
 end
