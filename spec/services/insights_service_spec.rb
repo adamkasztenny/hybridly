@@ -86,4 +86,39 @@ RSpec.describe InsightsService do
       expect(InsightsService.number_of_reservations).to be 4
     end
   end
+
+  context ".average_reservations_per_day" do
+    it "returns zero if there are no reservations" do
+      expect(InsightsService.average_reservations_per_day).to be 0
+    end
+
+    it "returns one if there is only one reservation on one day" do
+      create(:reservation, date: Date.new(2022, 1, 1))
+
+      expect(InsightsService.average_reservations_per_day).to eq(1.0)
+    end
+
+    it "returns two if there are two reservations on one day" do
+      create(:reservation, date: Date.new(2022, 1, 1))
+      create(:reservation, user: second_user, date: Date.new(2022, 1, 1))
+
+      expect(InsightsService.average_reservations_per_day).to eq(2.0)
+    end
+
+    it "returns one if there are two reservations on consecutive days" do
+      create(:reservation, date: Date.new(2022, 1, 1))
+      create(:reservation, user: second_user, date: Date.new(2022, 1, 2))
+
+      expect(InsightsService.average_reservations_per_day).to eq(1.0)
+    end
+
+    it "returns the average number of reservations across all days, ending with the last day with a reservation" do
+      first_reservation = create(:reservation, date: Date.new(2022, 1, 1))
+      create(:reservation, user: first_reservation.user, date: Date.new(2022, 1, 2))
+      create(:reservation, user: second_user, date: Date.new(2022, 1, 1))
+      create(:reservation, user: second_user, date: Date.new(2022, 1, 7))
+
+      expect(InsightsService.average_reservations_per_day).to eq(0.5714285714285714)
+    end
+  end
 end
