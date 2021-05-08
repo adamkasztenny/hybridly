@@ -15,6 +15,16 @@ describe "Insights", type: :feature do
   before do
     Timecop.freeze(Time.parse('2022-01-01'))
     Capybara.ignore_hidden_elements = false
+
+    login_as(user.email)
+
+    pending
+
+    click_on "Insights"
+
+    fill_in 'start_date', :with => '2022-01-01'
+    fill_in 'end_date', :with => '2022-01-31'
+    click_on "View"
   end
 
   after do
@@ -23,10 +33,6 @@ describe "Insights", type: :feature do
   end
 
   it "allows the user to view a line chart with the number of reservations per day" do
-    login_as(user.email)
-
-    click_on "Insights"
-
     expect(page).to have_content "Reservations Per Day"
 
     expect(page).to have_content('new Chartkick["LineChart"]')
@@ -36,23 +42,17 @@ describe "Insights", type: :feature do
     expect(page).to have_content '"2022-01-03",0'
     expect(page).to have_content '"2022-01-04",0'
     expect(page).to have_content '"2022-01-05",1'
+    expect(page).to have_content '"2022-01-15",0'
+    expect(page).to have_content '"2022-01-31",0'
   end
 
   it "allows the user to view the average number of reservations per day" do
-    login_as(user.email)
-
-    click_on "Insights"
-
     expect(page).to have_content "Average Reservations Per Day"
     expect(page).to have_content "0.60"
   end
 
   it "allows the user to view a pie chart with the total number of reservations and the total number of" +
      " reservations available" do
-    login_as(user.email)
-
-    click_on "Insights"
-
     expect(page).to have_content "Reservations Used vs Available"
 
     expect(page).to have_content('new Chartkick["PieChart"]')
