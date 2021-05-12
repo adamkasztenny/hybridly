@@ -12,7 +12,7 @@ A return to office solution :office:
 See the [backlog](https://github.com/adamkasztenny/hybridly/projects/1) for planned features.
 
 ## Quick Start
-You will need an Auth0 account, as well as Docker, make and Ruby 3.0.1 installed for these steps.
+You will need an Auth0 account, as well as Docker, make and Ruby 3.0.0 installed for these steps.
 
 1. In Auth0, create a [regular web application](https://auth0.com/docs/applications/set-up-an-application/register-regular-web-applications).
   1. `Allowed Callback URLs` should be `http://localhost:3000/authentication/callback`
