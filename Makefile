@@ -23,11 +23,11 @@ save:
 start_development: install
 	bin/rails server
 
-test: install
-	rspec spec
+test:
+	bundle exec rspec spec
 
 lint:
-	rubocop --fix .
+	bundle exec rubocop --fix .
 
 migrate:
 	bin/rails db:migrate
