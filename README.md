@@ -7,6 +7,7 @@ A return to office solution :office:
 - Employees can reserve time in the office
 - Employees can book desks and meeting rooms
 - View when others are in the office and where they are working
+- View charts and metrics to see how employees are using the office
 - Single-sign on (via [Auth0](https://auth0.com/))
 
 See the [backlog](https://github.com/adamkasztenny/hybridly/projects/1) for planned features.
