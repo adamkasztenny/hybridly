@@ -23,7 +23,7 @@ save:
 start_development: install
 	bin/rails server
 
-test:
+test: install
 	bundle exec rspec spec
 
 lint:
