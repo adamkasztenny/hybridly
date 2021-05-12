@@ -36,20 +36,20 @@ six_months_in_weeks = 6 * 4
 
 (0..six_months_in_weeks).map do |week|
   today = start_date.next_occurring(:monday) + week.weeks
-  two_days_from_now = today + 2
-  four_days_from_now = today + 4
-  next_week = today.next_week(:monday) + 1
+  mid_week = today + rand(1..2)
+  later_this_week = today + rand(3..4)
+  next_week = today.next_week(:monday) + rand(1..2)
 
   Reservation.find_or_create_by!(user: violette, date: today, workspace: board_room)
   Reservation.find_or_create_by!(user: nia, date: today, workspace: board_room)
   Reservation.find_or_create_by!(user: caleb, date: today, workspace: board_room)
 
-  Reservation.find_or_create_by!(user: nia, date: two_days_from_now)
-  Reservation.find_or_create_by!(user: keisha, date: two_days_from_now, workspace: engineering)
+  Reservation.find_or_create_by!(user: nia, date: mid_week)
+  Reservation.find_or_create_by!(user: keisha, date: mid_week, workspace: engineering)
 
-  Reservation.find_or_create_by!(user: violette, date: four_days_from_now, workspace: hr)
-  Reservation.find_or_create_by!(user: nia, date: four_days_from_now, workspace: hr)
-  Reservation.find_or_create_by!(user: caleb, date: four_days_from_now, workspace: sales)
+  Reservation.find_or_create_by!(user: violette, date: later_this_week, workspace: hr)
+  Reservation.find_or_create_by!(user: nia, date: later_this_week, workspace: hr)
+  Reservation.find_or_create_by!(user: caleb, date: later_this_week, workspace: sales)
 
   Reservation.find_or_create_by!(user: violette, date: next_week)
 end
