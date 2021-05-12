@@ -29,21 +29,27 @@ nia = User.find_or_create_by!(:email => "nia@example.com")
 caleb = User.find_or_create_by!(:email => "caleb@example.com")
 keisha = User.find_or_create_by!(:email => "keisha@example.com")
 
-today = Date.today.next_occurring(:monday)
-two_days_from_now = today + 2
-four_days_from_now = today + 4
-next_week = today.next_week(:monday)
-
 Rails.logger.info "Creating reservations"
-Reservation.find_or_create_by!(user: violette, date: today, workspace: board_room)
-Reservation.find_or_create_by!(user: nia, date: today, workspace: board_room)
-Reservation.find_or_create_by!(user: caleb, date: today, workspace: board_room)
 
-Reservation.find_or_create_by!(user: nia, date: two_days_from_now)
-Reservation.find_or_create_by!(user: keisha, date: two_days_from_now, workspace: engineering)
+start_date = 3.months.ago.to_date
+six_months_in_weeks = 6 * 4
 
-Reservation.find_or_create_by!(user: violette, date: four_days_from_now, workspace: hr)
-Reservation.find_or_create_by!(user: nia, date: four_days_from_now, workspace: hr)
-Reservation.find_or_create_by!(user: caleb, date: four_days_from_now, workspace: sales)
+(0..six_months_in_weeks).map do |week|
+  today = start_date.next_occurring(:monday) + week.weeks
+  two_days_from_now = today + 2
+  four_days_from_now = today + 4
+  next_week = today.next_week(:monday) + 1
 
-Reservation.find_or_create_by!(user: violette, date: next_week)
+  Reservation.find_or_create_by!(user: violette, date: today, workspace: board_room)
+  Reservation.find_or_create_by!(user: nia, date: today, workspace: board_room)
+  Reservation.find_or_create_by!(user: caleb, date: today, workspace: board_room)
+
+  Reservation.find_or_create_by!(user: nia, date: two_days_from_now)
+  Reservation.find_or_create_by!(user: keisha, date: two_days_from_now, workspace: engineering)
+
+  Reservation.find_or_create_by!(user: violette, date: four_days_from_now, workspace: hr)
+  Reservation.find_or_create_by!(user: nia, date: four_days_from_now, workspace: hr)
+  Reservation.find_or_create_by!(user: caleb, date: four_days_from_now, workspace: sales)
+
+  Reservation.find_or_create_by!(user: violette, date: next_week)
+end
