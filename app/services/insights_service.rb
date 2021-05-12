@@ -27,6 +27,6 @@ class InsightsService
   end
 
   def number_of_reservations_available
-    all_reservations_per_day.size * ReservationPolicy.current.capacity
+    (all_reservations_per_day.size * ReservationPolicy.current.capacity) - number_of_reservations
   end
 end

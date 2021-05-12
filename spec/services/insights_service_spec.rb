@@ -146,17 +146,17 @@ RSpec.describe InsightsService do
       expect(service.number_of_reservations_available).to be 6
     end
 
-    it "returns the office capacity if there is one reservation" do
+    it "returns the office capacity minus one if there is one reservation" do
       create(:reservation, date: Date.new(2022, 1, 1))
 
-      expect(service.number_of_reservations_available).to be 6
+      expect(service.number_of_reservations_available).to be 5
     end
 
-    it "returns the office capacity if there are two reservations on the same day by different users" do
+    it "returns the office capacity minus two if there are two reservations on the same day by different users" do
       create(:reservation, date: Date.new(2022, 1, 1))
       create(:reservation, user: second_user, date: Date.new(2022, 1, 1))
 
-      expect(service.number_of_reservations_available).to be 6
+      expect(service.number_of_reservations_available).to be 4
     end
 
     it "returns the total available spots across all days if there are two reservations on different days" +
@@ -164,7 +164,7 @@ RSpec.describe InsightsService do
       create(:reservation, date: Date.new(2022, 1, 1))
       create(:reservation, user: second_user, date: Date.new(2022, 1, 2))
 
-      expect(service.number_of_reservations_available).to be 6
+      expect(service.number_of_reservations_available).to be 4
     end
 
     it "returns total available spots across all days" do
@@ -175,7 +175,7 @@ RSpec.describe InsightsService do
 
       service = InsightsService.new(start_date: start_date, end_date: Date.new(2022, 1, 7))
 
-      expect(service.number_of_reservations_available).to be 14
+      expect(service.number_of_reservations_available).to be 10
     end
   end
 end
