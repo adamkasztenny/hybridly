@@ -18,8 +18,6 @@ describe "Insights", type: :feature do
 
     login_as(user.email)
 
-    pending
-
     click_on "Insights"
 
     fill_in 'start_date', :with => '2022-01-01'
@@ -48,7 +46,7 @@ describe "Insights", type: :feature do
 
   it "allows the user to view the average number of reservations per day" do
     expect(page).to have_content "Average Reservations Per Day"
-    expect(page).to have_content "0.60"
+    expect(page).to have_content "0.10"
   end
 
   it "allows the user to view a pie chart with the total number of reservations and the total number of" +
@@ -57,6 +55,6 @@ describe "Insights", type: :feature do
 
     expect(page).to have_content('new Chartkick["PieChart"]')
     expect(page).to have_content('"Used",3')
-    expect(page).to have_content('"Available",15')
+    expect(page).to have_content('"Available",93')
   end
 end

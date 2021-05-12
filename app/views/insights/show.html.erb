@@ -2,6 +2,22 @@
 <div class="uk-card uk-card-body">
   <h1 class="uk-heading-medium">Insights</h1>
 
+  <%= form_with :html => {:class => "uk-form-horizontal"}, :method => :get do |form| %>
+    <div>
+      <%= form.label :start_date, :class => "uk-form-label" %>
+      <div class="uk-form-controls">
+        <%= form.date_field :start_date, :class=> "uk-input" %>
+      </div>
+
+      <%= form.label :end_date, :class => "uk-form-label" %>
+      <div class="uk-form-controls">
+        <%= form.date_field :end_date, :class=> "uk-input" %>
+      </div>
+    </div>
+
+    <%= form.submit 'View', :class => "uk-button uk-button-primary" %>
+  <% end %>
+
   <h1 class="uk-heading-divider"></h1>
 
   <h1 class="uk-heading-small">Average Reservations Per Day</h1>
