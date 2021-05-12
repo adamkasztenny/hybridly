@@ -2,10 +2,16 @@ class InsightsController < ApplicationController
   include Secured
 
   def show
-    @all_reservations_per_day = InsightsService.all_reservations_per_day
-    @number_of_reservations = InsightsService.number_of_reservations
-    @average_reservations_per_day = InsightsService.average_reservations_per_day
+    start_date = Date.today
+    end_date = Date.today.next_month
+
+    @all_reservations_per_day = InsightsService.all_reservations_per_day(start_date: start_date, end_date: end_date)
+    @number_of_reservations = InsightsService.number_of_reservations(start_date: start_date, end_date: end_date)
+    @average_reservations_per_day = InsightsService.average_reservations_per_day(start_date: start_date,
+                                                                                 end_date: end_date)
     @reservations_used_vs_available = { :Used => @number_of_reservations,
-                                        :Available => InsightsService.number_of_reservations_available }
+                                        :Available => InsightsService.number_of_reservations_available(
+                                          start_date: start_date, end_date: end_date
+                                        ) }
   end
 end
