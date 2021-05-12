@@ -1,6 +1,8 @@
 FROM ruby:3.0.0-alpine3.13
 
 ENV RAILS_ENV=production
+ENV RACK_ENV=production
+ENV NODE_ENV=production
 
 WORKDIR /opt
 
@@ -15,6 +17,7 @@ RUN npm install -g yarn
 
 COPY . .
 
+RUN yarn install
 RUN rake assets:precompile
 RUN bin/webpack
 
