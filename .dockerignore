@@ -24,3 +24,5 @@ tmp/
 log/
 
 *.tar
+
+.github
