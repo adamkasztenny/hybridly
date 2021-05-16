@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_26_221805) do
+ActiveRecord::Schema.define(version: 2021_05_16_220624) do
 
   create_table "reservation_policies", force: :cascade do |t|
     t.integer "capacity", null: false
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 2021_04_26_221805) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "workspace_id"
+    t.string "verification_code", null: false
     t.index ["user_id", "date"], name: "index_reservations_on_user_id_and_date", unique: true
     t.index ["user_id"], name: "index_reservations_on_user_id"
     t.index ["workspace_id"], name: "index_reservations_on_workspace_id"

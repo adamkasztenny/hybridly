@@ -40,16 +40,20 @@ six_months_in_weeks = 6 * 4
   later_this_week = today + rand(3..4)
   next_week = today.next_week(:monday) + rand(1..2)
 
-  Reservation.find_or_create_by!(user: violette, date: today, workspace: board_room)
-  Reservation.find_or_create_by!(user: nia, date: today, workspace: board_room)
-  Reservation.find_or_create_by!(user: caleb, date: today, workspace: board_room)
+  Reservation.find_or_create_by!(user: violette, date: today, workspace: board_room,
+                                 verification_code: SecureRandom.uuid)
+  Reservation.find_or_create_by!(user: nia, date: today, workspace: board_room, verification_code: SecureRandom.uuid)
+  Reservation.find_or_create_by!(user: caleb, date: today, workspace: board_room, verification_code: SecureRandom.uuid)
 
-  Reservation.find_or_create_by!(user: nia, date: mid_week)
-  Reservation.find_or_create_by!(user: keisha, date: mid_week, workspace: engineering)
+  Reservation.find_or_create_by!(user: nia, date: mid_week, verification_code: SecureRandom.uuid)
+  Reservation.find_or_create_by!(user: keisha, date: mid_week, workspace: engineering,
+                                 verification_code: SecureRandom.uuid)
 
-  Reservation.find_or_create_by!(user: violette, date: later_this_week, workspace: hr)
-  Reservation.find_or_create_by!(user: nia, date: later_this_week, workspace: hr)
-  Reservation.find_or_create_by!(user: caleb, date: later_this_week, workspace: sales)
+  Reservation.find_or_create_by!(user: violette, date: later_this_week, workspace: hr,
+                                 verification_code: SecureRandom.uuid)
+  Reservation.find_or_create_by!(user: nia, date: later_this_week, workspace: hr, verification_code: SecureRandom.uuid)
+  Reservation.find_or_create_by!(user: caleb, date: later_this_week, workspace: sales,
+                                 verification_code: SecureRandom.uuid)
 
-  Reservation.find_or_create_by!(user: violette, date: next_week)
+  Reservation.find_or_create_by!(user: violette, date: next_week, verification_code: SecureRandom.uuid)
 end
