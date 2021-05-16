@@ -3,6 +3,7 @@ class Reservation < ApplicationRecord
   belongs_to :workspace, optional: true
 
   validates :date, presence: true
+  validates :verification_code, presence: true
 
   validates_uniqueness_of :user_id, :scope => :date, :message => ->(object, data) do
     "has already reserved #{object.date}"
