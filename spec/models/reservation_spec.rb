@@ -7,70 +7,77 @@ RSpec.describe Reservation, type: :model do
   let!(:reservation_policy) { create(:reservation_policy, capacity: 2) }
   let!(:workspace) { create(:workspace, user: reservation_policy.user) }
 
-  it "can be valid without a reservation" do
-    reservation = Reservation.new(date: Date.new(2022, 1, 1), user: user)
+  it "can be valid without a workspace" do
+    reservation = Reservation.new(date: Date.new(2022, 1, 1), user: user, verification_code: SecureRandom.uuid)
 
     expect(reservation).to be_valid
     expect(reservation.workspace).to be nil
   end
 
   it "can be valid with a workspace" do
-    reservation = Reservation.new(date: Date.new(2022, 1, 1), workspace: workspace, user: user)
+    reservation = Reservation.new(date: Date.new(2022, 1, 1), workspace: workspace, user: user,
+                                  verification_code: SecureRandom.uuid)
 
     expect(reservation).to be_valid
     expect(reservation.workspace).to be workspace
   end
 
   it "does not allow the date to be nil" do
-    reservation = Reservation.new(user: user)
+    reservation = Reservation.new(user: user, verification_code: SecureRandom.uuid)
 
     expect(reservation).not_to be_valid
     expect(reservation.errors.full_messages).to eq(["Date can't be blank"])
   end
 
   it "must be associated with a user" do
-    reservation = Reservation.new(date: Date.new(2022, 1, 1))
+    reservation = Reservation.new(date: Date.new(2022, 1, 1), verification_code: SecureRandom.uuid)
 
     expect(reservation).not_to be_valid
     expect(reservation.errors.full_messages).to eq(["User must exist"])
   end
 
   it "does not allow the user to book the same date twice" do
-    Reservation.create!(date: Date.new(2022, 1, 1), user: user)
-    reservation = Reservation.new(date: Date.new(2022, 1, 1), user: user)
+    Reservation.create!(date: Date.new(2022, 1, 1), user: user, verification_code: SecureRandom.uuid)
+    reservation = Reservation.new(date: Date.new(2022, 1, 1), user: user, verification_code: SecureRandom.uuid)
 
     expect(reservation).not_to be_valid
     expect(reservation.errors.full_messages).to eq(["User has already reserved 2022-01-01"])
   end
 
   it "does not allow the user to book the date if the booking exceeds the office capacity" do
-    first_resevation = Reservation.create!(date: Date.new(2022, 1, 1), user: user)
+    first_resevation = Reservation.create!(date: Date.new(2022, 1, 1), user: user, verification_code: SecureRandom.uuid)
     expect(first_resevation).to be_valid
 
-    second_reservation = Reservation.create!(date: Date.new(2022, 1, 1), user: second_user)
+    second_reservation = Reservation.create!(date: Date.new(2022, 1, 1), user: second_user,
+                                             verification_code: SecureRandom.uuid)
     expect(second_reservation).to be_valid
 
-    third_reservation = Reservation.new(date: Date.new(2022, 1, 1), user: third_user)
+    third_reservation = Reservation.new(date: Date.new(2022, 1, 1), user: third_user,
+                                        verification_code: SecureRandom.uuid)
 
     expect(third_reservation).not_to be_valid
     expect(third_reservation.errors.full_messages).to eq(["Capacity has been reached for 2022-01-01"])
   end
 
   it "does not allow the user to book the date if the booking exceeds the workspace capacity" do
-    first_resevation = Reservation.create!(date: Date.new(2022, 1, 1), workspace: workspace, user: user)
+    first_resevation = Reservation.create!(date: Date.new(2022, 1, 1), workspace: workspace, user: user,
+                                           verification_code: SecureRandom.uuid)
     expect(first_resevation).to be_valid
 
-    second_reservation = Reservation.new(date: Date.new(2022, 1, 1), workspace: workspace, user: second_user)
+    second_reservation = Reservation.new(date: Date.new(2022, 1, 1), workspace: workspace, user: second_user,
+                                         verification_code: SecureRandom.uuid)
     expect(second_reservation).not_to be_valid
     expect(second_reservation.errors.full_messages).to eq(["Workspace capacity has been reached for 2022-01-01"])
   end
 
   it "does allow the user to book the date if the booking does not exceed the office capacity" +
      "and no workspace has been chosen" do
-    first_resevation = Reservation.create!(date: Date.new(2022, 1, 1), workspace: workspace, user: user)
+    first_resevation = Reservation.create!(date: Date.new(2022, 1, 1), workspace: workspace, user: user,
+                                           verification_code: SecureRandom.uuid)
     expect(first_resevation).to be_valid
 
-    second_reservation = Reservation.new(date: Date.new(2022, 1, 1), user: second_user)
+    second_reservation = Reservation.new(date: Date.new(2022, 1, 1), user: second_user,
+                                         verification_code: SecureRandom.uuid)
     expect(second_reservation).to be_valid
   end
 
@@ -80,11 +87,11 @@ RSpec.describe Reservation, type: :model do
     end
 
     it "returns the number of reservations per day" do
-      Reservation.create!(date: Date.new(2022, 1, 1), user: user)
-      Reservation.create!(date: Date.new(2022, 1, 2), user: user)
+      Reservation.create!(date: Date.new(2022, 1, 1), user: user, verification_code: SecureRandom.uuid)
+      Reservation.create!(date: Date.new(2022, 1, 2), user: user, verification_code: SecureRandom.uuid)
 
-      Reservation.create!(date: Date.new(2022, 1, 1), user: second_user)
-      Reservation.create!(date: Date.new(2022, 3, 1), user: second_user)
+      Reservation.create!(date: Date.new(2022, 1, 1), user: second_user, verification_code: SecureRandom.uuid)
+      Reservation.create!(date: Date.new(2022, 3, 1), user: second_user, verification_code: SecureRandom.uuid)
 
       expect(Reservation.reservations_per_day).to eq({ Date.new(2022, 1, 1) => 2, Date.new(2022, 1, 2) => 1,
                                                        Date.new(2022, 3, 1) => 1 })
@@ -107,7 +114,7 @@ RSpec.describe Reservation, type: :model do
     end
 
     it "returns the capacity if there are no reservations made and reservations have been made for other days" do
-      Reservation.create!(date: Date.new(2022, 1, 5), user: user)
+      Reservation.create!(date: Date.new(2022, 1, 5), user: user, verification_code: SecureRandom.uuid)
 
       spots = Reservation.spots_remaining_for_today
 
@@ -115,7 +122,7 @@ RSpec.describe Reservation, type: :model do
     end
 
     it "returns remaining spots if reservations have been made" do
-      Reservation.create!(date: Date.new(2022, 1, 2), user: user)
+      Reservation.create!(date: Date.new(2022, 1, 2), user: user, verification_code: SecureRandom.uuid)
 
       spots = Reservation.spots_remaining_for_today
 
@@ -123,8 +130,8 @@ RSpec.describe Reservation, type: :model do
     end
 
     it "returns zero if there are no spots remaining" do
-      Reservation.create!(date: Date.new(2022, 1, 2), user: user)
-      Reservation.create!(date: Date.new(2022, 1, 2), user: second_user)
+      Reservation.create!(date: Date.new(2022, 1, 2), user: user, verification_code: SecureRandom.uuid)
+      Reservation.create!(date: Date.new(2022, 1, 2), user: second_user, verification_code: SecureRandom.uuid)
 
       spots = Reservation.spots_remaining_for_today
 
@@ -140,8 +147,10 @@ RSpec.describe Reservation, type: :model do
     end
 
     it "returns a list of reservations for a particular day" do
-      first_resevation = Reservation.create!(date: Date.new(2022, 1, 1), user: user)
-      second_reservation = Reservation.create!(date: Date.new(2022, 1, 1), user: second_user)
+      first_resevation = Reservation.create!(date: Date.new(2022, 1, 1), user: user,
+                                             verification_code: SecureRandom.uuid)
+      second_reservation = Reservation.create!(date: Date.new(2022, 1, 1), user: second_user,
+                                               verification_code: SecureRandom.uuid)
 
       reservations = Reservation.for_date(Date.new(2022, 1, 1))
 

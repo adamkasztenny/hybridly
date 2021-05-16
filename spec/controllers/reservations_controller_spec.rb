@@ -36,6 +36,23 @@ RSpec.describe ReservationsController do
       expect(Reservation.first.user).to eq(user)
     end
 
+    it 'creates a verification code for the reservation' do
+      post :create, :params => { :reservation => { :date => date, :workspace_id => "" } }
+
+      verification_code = Reservation.first.verification_code
+      expect(verification_code).not_to be_blank
+    end
+
+    it 'ensures each verification code for each reservation is unique' do
+      post :create, :params => { :reservation => { :date => date, :workspace_id => "" } }
+      post :create, :params => { :reservation => { :date => '2022-02-02', :workspace_id => "" } }
+
+      first_verification_code = Reservation.first.verification_code
+      second_verification_code = Reservation.last.verification_code
+
+      expect(first_verification_code).not_to eq(second_verification_code)
+    end
+
     it 'does not saves the workspace if no ID is provided' do
       post :create, :params => { :reservation => { :date => date, :workspace_id => "" } }
 

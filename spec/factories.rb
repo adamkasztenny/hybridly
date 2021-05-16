@@ -20,6 +20,7 @@ FactoryBot.define do
 
   factory :reservation do
     date { Date.parse('2022-01-01') }
+    verification_code { SecureRandom.uuid }
 
     user
   end

@@ -14,6 +14,7 @@ class ReservationsController < ApplicationController
     end
 
     @reservation = Reservation.new(reservation_parameters)
+    @reservation.verification_code = SecureRandom.uuid
     @reservation.user = User.find(session[:user_id])
 
     if @reservation.save
