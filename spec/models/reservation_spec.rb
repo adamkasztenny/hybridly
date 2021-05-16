@@ -43,6 +43,13 @@ RSpec.describe Reservation, type: :model do
     expect(reservation.errors.full_messages).to eq(["Verification code can't be blank"])
   end
 
+  it "cannot have a blank verification code" do
+    reservation = Reservation.new(date: Date.new(2022, 1, 1), user: user, verification_code: "                         ")
+
+    expect(reservation).not_to be_valid
+    expect(reservation.errors.full_messages).to eq(["Verification code can't be blank"])
+  end
+
   it "does not allow the user to book the same date twice" do
     Reservation.create!(date: Date.new(2022, 1, 1), user: user, verification_code: SecureRandom.uuid)
     reservation = Reservation.new(date: Date.new(2022, 1, 1), user: user, verification_code: SecureRandom.uuid)
