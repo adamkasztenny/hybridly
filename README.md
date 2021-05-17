@@ -1,6 +1,6 @@
 # Hybridly
 
-An open source return to office solution :office:
+An open source hybrid work solution :office:
 
 ## :star: Features :star:
 - Set a limit on the total number of people in the office per day
