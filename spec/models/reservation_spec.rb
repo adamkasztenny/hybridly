@@ -174,4 +174,24 @@ RSpec.describe Reservation, type: :model do
       expect(reservations).to include(second_reservation)
     end
   end
+
+  context ".verify" do
+    it "returns the reservation if it matches the verification code" do
+      verification_code = SecureRandom.uuid
+      reservation = Reservation.create!(date: Date.new(2022, 1, 1), user: user, verification_code: verification_code)
+
+      verified_reservation = Reservation.verify(verification_code)
+
+      expect(verified_reservation).to eq(reservation)
+    end
+
+    it "returns false if the verification code does not match any reservation" do
+      verification_code = SecureRandom.uuid
+      reservation = Reservation.create!(date: Date.new(2022, 1, 1), user: user, verification_code: SecureRandom.uuid)
+
+      verified_reservation = Reservation.verify(verification_code)
+
+      expect(verified_reservation).to be false
+    end
+  end
 end
