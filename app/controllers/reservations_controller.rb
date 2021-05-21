@@ -32,6 +32,11 @@ class ReservationsController < ApplicationController
     @reservations = Reservation.for_date(@date)
   end
 
+  def verify
+    @verification_code = params[:verification_code]
+    @reservation = Reservation.verify(@verification_code)
+  end
+
   private
 
   def reservation_parameters
