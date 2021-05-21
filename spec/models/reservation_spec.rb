@@ -187,7 +187,9 @@ RSpec.describe Reservation, type: :model do
 
     it "returns false if the verification code does not match any reservation" do
       verification_code = SecureRandom.uuid
-      reservation = Reservation.create!(date: Date.new(2022, 1, 1), user: user, verification_code: SecureRandom.uuid)
+      non_matching_verification_code = SecureRandom.uuid
+      reservation = Reservation.create!(date: Date.new(2022, 1, 1), user: user,
+                                        verification_code: non_matching_verification_code)
 
       verified_reservation = Reservation.verify(verification_code)
 
