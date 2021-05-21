@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Dashboard", type: :feature do
+describe "View Reservations", type: :feature do
   let!(:user) { create(:user) }
   let!(:reservation_policy) { create(:reservation_policy, capacity: 3) }
 
