@@ -43,15 +43,14 @@ describe "Reserving a spot in the office", type: :feature do
   end
 
   it "displays a QR code for confirmation after reserving a workspace" do
-    pending
-
     click_on 'Reserve time in the office'
     expect(page).to have_content "New Reservation"
 
     fill_in 'reservation_date', :with => '2022-01-01'
     click_on "Create Reservation"
 
-    expect(page).to have_css("img", text: "code.svg")
+    expect(page).to have_content "Use this QR code when confirming your reservation:"
+    expect(page.find('#qr_code')).not_to be nil
   end
 
   it "displays an error message if no reservation date is picked" do

@@ -70,12 +70,6 @@ RSpec.describe ReservationsController do
 
       expect(flash.notice).to eq("Reservation for #{date} successful!")
     end
-
-    it 'redirects to the dashboard' do
-      post :create, :params => { :reservation => { :date => date, :workspace_id => "" } }
-
-      expect(response).to redirect_to('/dashboard')
-    end
   end
 
   context 'creating a new reservation unsuccessfully' do
