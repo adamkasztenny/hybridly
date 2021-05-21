@@ -42,6 +42,18 @@ describe "Reserving a spot in the office", type: :feature do
     expect(page).to have_content "Reservation for 2022-01-01 successful!"
   end
 
+  it "displays a QR code for confirmation after reserving a workspace" do
+    pending
+
+    click_on 'Reserve time in the office'
+    expect(page).to have_content "New Reservation"
+
+    fill_in 'reservation_date', :with => '2022-01-01'
+    click_on "Create Reservation"
+
+    expect(page).to have_css("img", text: "code.svg")
+  end
+
   it "displays an error message if no reservation date is picked" do
     click_on 'Reserve time in the office'
 
