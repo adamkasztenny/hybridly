@@ -1,23 +1,32 @@
 <div class="uk-card uk-card-body">
-  <h1 class="uk-heading-small">New Reservation</h1>
 
-  <h1 class="uk-heading-divider"></h1>
+  <% unless @qr_code.nil? %>
+    <h1 class="uk-heading-small"> Use this QR code when confirming your reservation: </h1>
 
-  <%= form_with :html => {:class => "uk-form-horizontal"}, model: @reservation do |form| %>
-    <div>
-      <%= form.label :date, :class => "uk-form-label" %>
-      <div class="uk-form-controls">
-        <%= form.date_field :date, :class=> "uk-input" %>
+    <span id="qr_code">
+      <%= @qr_code %>
+    </span>
+  <% else %>
+    <h1 class="uk-heading-small">New Reservation</h1>
+
+    <h1 class="uk-heading-divider"></h1>
+
+    <%= form_with :html => {:class => "uk-form-horizontal"}, model: @reservation do |form| %>
+      <div>
+        <%= form.label :date, :class => "uk-form-label" %>
+        <div class="uk-form-controls">
+          <%= form.date_field :date, :class=> "uk-input" %>
+        </div>
+
+        <%= form.label :workspace, :class => "uk-form-label" %>
+        <div class="uk-form-controls">
+          <%= form.collection_select(:workspace_id, Workspace.all, :id, :location, { :prompt => 'Select a Workspace', :selected => @reservation.workspace}, { class: 'uk-select' }) %>
+        </div>
       </div>
 
-      <%= form.label :workspace, :class => "uk-form-label" %>
-      <div class="uk-form-controls">
-        <%= form.collection_select(:workspace_id, Workspace.all, :id, :location, { :prompt => 'Select a Workspace', :selected => @reservation.workspace}, { class: 'uk-select' }) %>
-      </div>
-    </div>
+      <%= render :partial => 'form_errors', locals: { model: @reservation } %>
 
-    <%= render :partial => 'form_errors', locals: { model: @reservation } %>
-
-    <%= form.submit :class => "uk-button uk-button-primary" %>
+      <%= form.submit :class => "uk-button uk-button-primary" %>
+    <% end %>
   <% end %>
 </div>

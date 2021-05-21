@@ -6,6 +6,8 @@ class ReservationsController < ApplicationController
   end
 
   def create
+    @qr_code = nil
+
     if !workspace_is_valid?(reservation_parameters)
       @reservation = Reservation.new
       @reservation.errors.add(:workspace, "does not exist")
@@ -18,8 +20,9 @@ class ReservationsController < ApplicationController
     @reservation.user = User.find(session[:user_id])
 
     if @reservation.save
+      @qr_code = ReservationConfirmationService.create_qr_code(@reservation).html_safe
       flash.notice = "Reservation for #{@reservation.date} successful!"
-      redirect_to '/dashboard'
+      render :new
     else
       render :new
     end
