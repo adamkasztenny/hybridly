@@ -20,7 +20,7 @@ class ReservationsController < ApplicationController
     @reservation.user = User.find(session[:user_id])
 
     if @reservation.save
-      @qr_code = ReservationConfirmationService.create_qr_code(@reservation).html_safe
+      @qr_code = ReservationConfirmationService.create_qr_code(@reservation, request.base_url).html_safe
       flash.notice = "Reservation for #{@reservation.date} successful!"
       render :new
     else
