@@ -16,4 +16,13 @@ RSpec.describe ReservationConfirmationService do
 
     expect(qr_code).to eq(expected_qr_code_as_svg)
   end
+
+  it "creates different QR codes for different reservations" do
+    second_reservation = create(:reservation, user: reservation.user, date: Date.new(2022, 2, 2))
+
+    first_qr_code = ReservationConfirmationService.create_qr_code(reservation, domain)
+    second_qr_code = ReservationConfirmationService.create_qr_code(second_reservation, domain)
+
+    expect(first_qr_code).not_to eq(second_qr_code)
+  end
 end
