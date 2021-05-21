@@ -16,6 +16,8 @@ gem 'omniauth-rails_csrf_protection', '~> 0.1'
 
 gem "rolify"
 
+gem "rqrcode", "~> 2.0"
+
 gem "simple_calendar", "~> 2.4"
 gem "chartkick"
 gem 'groupdate'
