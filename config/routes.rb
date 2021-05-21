@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   resource :reservations
   get '/reservations/:date' => 'reservations#show_for_date'
+  get '/reservations/:verification_code/verify' => 'reservations#verify'
 
   resource :reservation_policies
   resource :workspaces
