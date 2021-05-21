@@ -22,10 +22,9 @@ class ReservationsController < ApplicationController
     if @reservation.save
       @qr_code = ReservationConfirmationService.create_qr_code(@reservation, request.base_url).html_safe
       flash.notice = "Reservation for #{@reservation.date} successful!"
-      render :new
-    else
-      render :new
     end
+
+    render :new
   end
 
   def show_for_date
