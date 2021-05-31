@@ -6,6 +6,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 2
     strategy:
       matrix:
         ruby-version: ['3.0.0']
