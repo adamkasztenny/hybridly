@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe "Verifying a Reservation", type: :feature do
   let!(:admin_user) { create(:admin_user) }
+  let!(:other_admin_user) { create(:admin_user, email: "other-admin@example.com") }
   let!(:regular_user) { create(:user) }
 
   let!(:reservation_policy) { create(:reservation_policy, user: admin_user) }
@@ -23,6 +24,33 @@ describe "Verifying a Reservation", type: :feature do
       visit "/reservations/#{non_existent_verification_code}/verify"
 
       expect(page).to have_content "Verification failed! The reservation was not found!"
+    end
+
+    it "does not verify a reservation twice when visited by the same user" do
+      pending
+
+      visit "/reservations/#{reservation.verification_code}/verify"
+
+      expect(page).to have_content "Verified reservation for #{regular_user.email} on #{reservation.date}"
+
+      visit "/reservations/#{reservation.verification_code}/verify"
+
+      expect(page).not_to have_content "Verified reservation for #{regular_user.email} on #{reservation.date}"
+      expect(page).to have_content "#{admin_user.email} has already verified this reservation!"
+    end
+
+    it "does not verify a reservation twice when visited by a different user" do
+      pending
+
+      visit "/reservations/#{reservation.verification_code}/verify"
+
+      expect(page).to have_content "Verified reservation for #{regular_user.email} on #{reservation.date}"
+
+      login_as(other_admin_user.email)
+      visit "/reservations/#{reservation.verification_code}/verify"
+
+      expect(page).not_to have_content "Verified reservation for #{regular_user.email} on #{reservation.date}"
+      expect(page).to have_content "#{admin_user.email} has already verified this reservation!"
     end
   end
 
