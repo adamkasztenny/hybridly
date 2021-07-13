@@ -211,9 +211,21 @@ RSpec.describe Reservation, type: :model do
       verification_code = SecureRandom.uuid
       reservation = Reservation.create!(date: Date.new(2022, 1, 1), user: user, verification_code: verification_code)
 
-      verified_reservation = Reservation.verify(verification_code)
+      verified_reservation = Reservation.verify(verification_code, admin_user)
 
-      expect(verified_reservation).to eq(reservation)
+      expect(verified_reservation.valid?).to be true
+      expect(verified_reservation.id).to eq(reservation.id)
+    end
+
+    it "sets who verified the reservation" do
+      verification_code = SecureRandom.uuid
+      reservation = Reservation.create!(date: Date.new(2022, 1, 1), user: user, verification_code: verification_code)
+
+      expect(reservation.verified_by).to be nil
+
+      verified_reservation = Reservation.verify(verification_code, admin_user)
+
+      expect(verified_reservation.verified_by.id).to be admin_user.id
     end
 
     it "returns false if the verification code does not match any reservation" do
@@ -222,9 +234,34 @@ RSpec.describe Reservation, type: :model do
       reservation = Reservation.create!(date: Date.new(2022, 1, 1), user: user,
                                         verification_code: non_matching_verification_code)
 
-      verified_reservation = Reservation.verify(verification_code)
+      verified_reservation = Reservation.verify(verification_code, admin_user)
 
       expect(verified_reservation).to be false
+    end
+
+    it "does not set who verified the reservation if the code does not match" do
+      verification_code = SecureRandom.uuid
+      non_matching_verification_code = SecureRandom.uuid
+      reservation = Reservation.create!(date: Date.new(2022, 1, 1), user: user,
+                                        verification_code: non_matching_verification_code)
+
+      expect(reservation.verified_by).to be nil
+
+      Reservation.verify(verification_code, admin_user)
+
+      expect(Reservation.find(reservation.id).verified_by).to be nil
+    end
+
+    it "does not set who verified the reservation if the verifying user is not an admin" do
+      verification_code = SecureRandom.uuid
+      reservation = Reservation.create!(date: Date.new(2022, 1, 1), user: user, verification_code: verification_code)
+
+      expect(reservation.verified_by).to be nil
+
+      reservation = Reservation.verify(verification_code, second_user)
+
+      expect(Reservation.find(reservation.id).verified_by).to be nil
+      expect(reservation.valid?).to be false
     end
   end
 end
