@@ -1,9 +1,14 @@
 class Reservation < ApplicationRecord
+  include UserValidations
+
   belongs_to :user
+  belongs_to :verified_by, class_name: 'User', optional: true
   belongs_to :workspace, optional: true
 
   validates :date, presence: true
+
   validates :verification_code, presence: true
+  validate :verified_by_an_admin
 
   validates_uniqueness_of :user_id, :scope => :date, :message => ->(object, data) do
     "has already reserved #{object.date}"
@@ -64,5 +69,17 @@ class Reservation < ApplicationRecord
     end
 
     number_of_reservations
+  end
+
+  def verified_by_an_admin
+    if verified_by.nil?
+      return
+    end
+
+    model_user_must_be_an_admin(verified_by)
+
+    if user.id == verified_by.id
+      errors.add(:verified_by, "cannot be the same user")
+    end
   end
 end

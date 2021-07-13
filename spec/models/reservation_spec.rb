@@ -2,9 +2,11 @@ require 'rails_helper'
 
 RSpec.describe Reservation, type: :model do
   let!(:user) { create(:user) }
-  let(:second_user) { create(:user, email: "hybridly-second@example.com") }
-  let(:third_user) { create(:user, email: "hybridly-third@example.com") }
-  let!(:reservation_policy) { create(:reservation_policy, capacity: 2) }
+  let!(:second_user) { create(:user, email: "hybridly-second@example.com") }
+  let!(:third_user) { create(:user, email: "hybridly-third@example.com") }
+
+  let!(:admin_user) { create(:admin_user) }
+  let!(:reservation_policy) { create(:reservation_policy, capacity: 2, user: admin_user) }
   let!(:workspace) { create(:workspace, user: reservation_policy.user) }
 
   it "can be valid without a workspace" do
@@ -20,6 +22,35 @@ RSpec.describe Reservation, type: :model do
 
     expect(reservation).to be_valid
     expect(reservation.workspace).to be workspace
+  end
+
+  it "can be valid with a verifying admin user" do
+    reservation = Reservation.new(date: Date.new(2022, 1, 1), user: user, verification_code: SecureRandom.uuid,
+                                  verified_by: admin_user)
+
+    expect(reservation).to be_valid
+    expect(reservation.verified_by).not_to be nil
+  end
+
+  it "does not allow a regular user to verify the reservation" do
+    reservation = Reservation.new(date: Date.new(2022, 1, 1), user: user, verification_code: SecureRandom.uuid,
+                                  verified_by: second_user)
+
+    expect(reservation).not_to be_valid
+  end
+
+  it "does not allow the same regular user to verify the reservation" do
+    reservation = Reservation.new(date: Date.new(2022, 1, 1), user: user, verification_code: SecureRandom.uuid,
+                                  verified_by: user)
+
+    expect(reservation).not_to be_valid
+  end
+
+  it "does not allow the same admin user to verify the reservation" do
+    reservation = Reservation.new(date: Date.new(2022, 1, 1), user: admin_user, verification_code: SecureRandom.uuid,
+                                  verified_by: admin_user)
+
+    expect(reservation).not_to be_valid
   end
 
   it "does not allow the date to be nil" do
