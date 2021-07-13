@@ -18,4 +18,10 @@ class Workspace < ApplicationRecord
   def exceeds_capacity?(number_of_reservations)
     capacity < number_of_reservations
   end
+
+  private
+
+  def user_must_be_an_admin
+    model_user_must_be_an_admin(user)
+  end
 end

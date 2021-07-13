@@ -13,4 +13,10 @@ class ReservationPolicy < ApplicationRecord
   def self.exceeds_capacity?(number_of_reservations)
     self.current.capacity < number_of_reservations
   end
+
+  private
+
+  def user_must_be_an_admin
+    model_user_must_be_an_admin(user)
+  end
 end
