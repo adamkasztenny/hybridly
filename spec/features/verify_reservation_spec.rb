@@ -27,8 +27,6 @@ describe "Verifying a Reservation", type: :feature do
     end
 
     it "does not verify a reservation twice when visited by the same user" do
-      pending
-
       visit "/reservations/#{reservation.verification_code}/verify"
 
       expect(page).to have_content "Verified reservation for #{regular_user.email} on #{reservation.date}"
@@ -36,12 +34,10 @@ describe "Verifying a Reservation", type: :feature do
       visit "/reservations/#{reservation.verification_code}/verify"
 
       expect(page).not_to have_content "Verified reservation for #{regular_user.email} on #{reservation.date}"
-      expect(page).to have_content "#{admin_user.email} has already verified this reservation!"
+      expect(page).to have_content "This reservation has already been verified!"
     end
 
     it "does not verify a reservation twice when visited by a different user" do
-      pending
-
       visit "/reservations/#{reservation.verification_code}/verify"
 
       expect(page).to have_content "Verified reservation for #{regular_user.email} on #{reservation.date}"
@@ -50,7 +46,7 @@ describe "Verifying a Reservation", type: :feature do
       visit "/reservations/#{reservation.verification_code}/verify"
 
       expect(page).not_to have_content "Verified reservation for #{regular_user.email} on #{reservation.date}"
-      expect(page).to have_content "#{admin_user.email} has already verified this reservation!"
+      expect(page).to have_content "This reservation has already been verified!"
     end
   end
 

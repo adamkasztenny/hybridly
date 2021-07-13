@@ -1,6 +1,8 @@
 <div class="uk-card uk-card-body">
 
-  <% if @reservation %>
+  <% if @was_already_verified %>
+    <h1 class="uk-heading-small">&#128561; This reservation has already been verified!</h1>
+  <% elsif @reservation %>
     <h1 class="uk-heading-small">&#127881; Verified reservation for <%= @reservation.user.email %> on <%= @reservation.date %>!</h1>
   <% else %>
     <h1 class="uk-heading-small">&#128561; Verification failed! The reservation was not found!</h1>
