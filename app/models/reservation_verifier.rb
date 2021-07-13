@@ -9,4 +9,9 @@ class ReservationVerifier
     reservation.save
     reservation
   end
+
+  def self.has_been_verified?(verification_code)
+    reservation = Reservation.find_by(verification_code: verification_code)
+    !reservation.nil? && !reservation.verified_by.nil?
+  end
 end

@@ -36,8 +36,14 @@ class ReservationsController < ApplicationController
     user = User.find(session[:user_id])
 
     if user.has_role?(:admin)
-      @verification_code = params[:verification_code]
-      @reservation = ReservationVerifier.verify(@verification_code, user)
+      verification_code = params[:verification_code]
+
+      @was_already_verified = ReservationVerifier.has_been_verified?(verification_code)
+      if @was_already_verified
+        return
+      end
+
+      @reservation = ReservationVerifier.verify(verification_code, user)
     else
       render :file => "public/401.html", :status => :unauthorized
     end

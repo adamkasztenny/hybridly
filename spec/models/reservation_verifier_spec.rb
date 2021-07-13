@@ -65,4 +65,27 @@ RSpec.describe ReservationVerifier do
       expect(reservation.valid?).to be false
     end
   end
+
+  context ".has_been_verified?" do
+    it "returns true if the resrevation has been verified" do
+      verification_code = SecureRandom.uuid
+      Reservation.create!(date: Date.new(2022, 1, 1), user: user, verification_code: verification_code,
+                          verified_by: admin_user)
+
+      expect(ReservationVerifier.has_been_verified?(verification_code)).to be true
+    end
+
+    it "returns false if the resrevation has not been verified" do
+      verification_code = SecureRandom.uuid
+      Reservation.create!(date: Date.new(2022, 1, 1), user: user, verification_code: verification_code)
+
+      expect(ReservationVerifier.has_been_verified?(verification_code)).to be false
+    end
+
+    it "returns false if a resrevation with the verification code does not exist" do
+      verification_code = SecureRandom.uuid
+
+      expect(ReservationVerifier.has_been_verified?(verification_code)).to be false
+    end
+  end
 end
