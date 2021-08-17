@@ -31,6 +31,10 @@ class Reservation < ApplicationRecord
     Reservation.where(date: date)
   end
 
+  def verified?
+    !verified_by.nil?
+  end
+
   private
 
   def does_not_exceed_office_capacity
