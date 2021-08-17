@@ -9,11 +9,11 @@ describe "View Reservations", type: :feature do
     create(:workspace, location: "Board Room", workspace_type: :meeting_room, user: reservation_policy.user)
   }
 
-  let!(:reservation) { create(:reservation, user: user, workspace: engineering) }
+  let!(:reservation) { create(:reservation, user: user, workspace: engineering, verified_by: reservation_policy.user) }
   let!(:second_reservation) {
     create(:reservation, user: create(:user, email: "second-hybridly@example.com"), workspace: board_room)
   }
-  let!(:third_reservation) { create(:reservation, user: create(:user, email: "third-hybridly@example.com")) }
+  let!(:third_reservation) { create(:reservation, user: create(:user, email: "third-hybridly@example.com"), verified_by: reservation_policy.user) }
 
   before do
     Timecop.freeze(Time.parse('2022-01-01'))
@@ -51,4 +51,17 @@ describe "View Reservations", type: :feature do
     expect(page).to have_content "second-hybridly@example.com (Working in Board Room)"
     expect(page).to have_content "third-hybridly@example.com"
   end
+
+  it "shows who has a verified reservation" do
+    pending
+
+    login_as(user.email)
+
+    click_on "3 people in the office"
+
+    expect(page).to have_content "✔️ hybridly@example.com"
+    expect(page).to have_content "❌second-hybridly@example.com"
+    expect(page).to have_content "✔️ third-hybridly@example.com"
+  end
+
 end
