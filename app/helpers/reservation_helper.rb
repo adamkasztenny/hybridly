@@ -10,4 +10,12 @@ module ReservationHelper
 
     "#{people_count} in the office"
   end
+
+  def icon_for(reservation)
+    if reservation.verified?
+      "&#10004;"
+    else
+      "&#10060;"
+    end
+  end
 end

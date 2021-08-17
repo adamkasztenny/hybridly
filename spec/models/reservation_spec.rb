@@ -205,4 +205,21 @@ RSpec.describe Reservation, type: :model do
       expect(reservations).to include(second_reservation)
     end
   end
+
+  context ".verified?" do
+    it "returns true if the reservation was verified" do
+      reservation = Reservation.create!(date: Date.new(2022, 1, 1), user: user,
+                                        verification_code: SecureRandom.uuid,
+                                        verified_by: admin_user)
+
+      expect(reservation.verified?).to be true
+    end
+
+    it "returns false if the reservation was not verified" do
+      reservation = Reservation.create!(date: Date.new(2022, 1, 1), user: user,
+                                        verification_code: SecureRandom.uuid)
+
+      expect(reservation.verified?).to be false
+    end
+  end
 end
