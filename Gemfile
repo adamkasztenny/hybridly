@@ -22,6 +22,8 @@ gem "simple_calendar", "~> 2.4"
 gem "chartkick"
 gem 'groupdate'
 
+gem "graphql"
+
 gem 'bootsnap', '>= 1.4.4', require: false
 
 group :development, :test do
@@ -55,3 +57,4 @@ group :test do
 end
 
 gem 'tzinfo-data'
+gem 'graphiql-rails', group: :development
