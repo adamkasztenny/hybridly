@@ -101,6 +101,10 @@ GEM
     ffi (1.15.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    graphiql-rails (1.7.0)
+      railties
+      sprockets-rails
+    graphql (1.12.14)
     groupdate (5.2.2)
       activesupport (>= 5)
     hashie (4.1.0)
@@ -309,6 +313,8 @@ DEPENDENCIES
   capybara (>= 3.26)
   chartkick
   factory_bot_rails
+  graphiql-rails
+  graphql
   groupdate
   jbuilder (~> 2.7)
   listen (~> 3.3)
