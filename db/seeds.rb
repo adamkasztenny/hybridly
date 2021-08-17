@@ -41,11 +41,13 @@ six_months_in_weeks = 6 * 4
   next_week = today.next_week(:monday) + rand(1..2)
 
   Reservation.find_or_create_by!(user: violette, date: today, workspace: board_room,
-                                 verification_code: SecureRandom.uuid)
+                                 verification_code: SecureRandom.uuid, verified_by: admin_user)
   Reservation.find_or_create_by!(user: nia, date: today, workspace: board_room, verification_code: SecureRandom.uuid)
-  Reservation.find_or_create_by!(user: caleb, date: today, workspace: board_room, verification_code: SecureRandom.uuid)
+  Reservation.find_or_create_by!(user: caleb, date: today, workspace: board_room, verification_code: SecureRandom.uuid,
+                                 verified_by: admin_user)
 
-  Reservation.find_or_create_by!(user: nia, date: mid_week, verification_code: SecureRandom.uuid)
+  Reservation.find_or_create_by!(user: nia, date: mid_week, verification_code: SecureRandom.uuid,
+                                 verified_by: admin_user)
   Reservation.find_or_create_by!(user: keisha, date: mid_week, workspace: engineering,
                                  verification_code: SecureRandom.uuid)
 
@@ -55,5 +57,6 @@ six_months_in_weeks = 6 * 4
   Reservation.find_or_create_by!(user: caleb, date: later_this_week, workspace: sales,
                                  verification_code: SecureRandom.uuid)
 
-  Reservation.find_or_create_by!(user: violette, date: next_week, verification_code: SecureRandom.uuid)
+  Reservation.find_or_create_by!(user: violette, date: next_week, verification_code: SecureRandom.uuid,
+                                 verified_by: admin_user)
 end
