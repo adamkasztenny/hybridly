@@ -23,6 +23,7 @@ gem "chartkick"
 gem 'groupdate'
 
 gem "graphql"
+gem "graphiql-rails"
 
 gem 'bootsnap', '>= 1.4.4', require: false
 

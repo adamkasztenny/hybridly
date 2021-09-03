@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  post "/graphql", to: "graphql#execute"
   root 'home#show'
 
   get '/authentication/callback' => 'authentication#callback'
@@ -14,4 +13,9 @@ Rails.application.routes.draw do
 
   resource :reservation_policies
   resource :workspaces
+
+  post "/graphql", to: "graphql#execute"
+  if Rails.env.development?
+    mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
+  end
 end
