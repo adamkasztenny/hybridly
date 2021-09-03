@@ -3,7 +3,7 @@ require 'graphql_helper'
 
 RSpec.describe "Reservation Policy Query" do
   before do
-    Timecop.freeze(Time.parse('2021-02-01'))
+    Timecop.freeze(Date.parse('2021-02-01'))
   end
 
   after do
@@ -15,7 +15,7 @@ RSpec.describe "Reservation Policy Query" do
 
     result = execute_reservation_policy_query
 
-    expect(result).to eq({ "reservationPolicy" => { "capacity" => 1, "createdAt" => "2021-02-01T05:00:00Z" } })
+    expect(result).to eq({ "reservationPolicy" => { "capacity" => 1, "createdAt" => "2021-02-01T00:00:00Z" } })
   end
 
   private
