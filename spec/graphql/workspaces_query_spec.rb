@@ -27,9 +27,9 @@ RSpec.describe "Workspaces Query" do
     query_string = "
     {
       workspaces {
-	id
-	location
-	capacity
+        id
+        location
+        capacity
         workspaceType
       }
     }"
