@@ -24,7 +24,7 @@ RSpec.describe "Reservation Policy Query" do
     query_string = "
     {
       reservationPolicy {
-	capacity
+        capacity
         createdAt
       }
     }"
