@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'graphql_helper'
 
 RSpec.describe "Reservation Policy Query" do
   before do
@@ -12,14 +13,14 @@ RSpec.describe "Reservation Policy Query" do
   it "should return the current reservation policy" do
     create(:reservation_policy)
 
-    result = executeReservationPolicyQuery
+    result = execute_reservation_policy_query
 
     expect(result).to eq({ "reservationPolicy" => { "capacity" => 1, "createdAt" => "2021-02-01T05:00:00Z" } })
   end
 
   private
 
-  def executeReservationPolicyQuery
+  def execute_reservation_policy_query
     query_string = "
     {
       reservationPolicy {
@@ -27,9 +28,6 @@ RSpec.describe "Reservation Policy Query" do
         createdAt
       }
     }"
-    result = HybridlySchema.execute(query_string)
-    expect(result["errors"]).to be nil
-
-    return result["data"]
+    execute_query(query_string)
   end
 end
