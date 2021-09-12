@@ -23,7 +23,6 @@ gem "chartkick"
 gem 'groupdate'
 
 gem "graphql"
-gem "graphiql-rails"
 
 gem 'bootsnap', '>= 1.4.4', require: false
 
@@ -58,4 +57,4 @@ group :test do
 end
 
 gem 'tzinfo-data'
-gem 'graphiql-rails', group: :development
+gem 'graphiql-rails', group: [:development, :test]
