@@ -68,4 +68,40 @@ RSpec.describe ReservationPolicy, type: :model do
       expect(ReservationPolicy.exceeds_capacity?(1)).to be false
     end
   end
+
+  context ".spots_remaining" do
+    let!(:reservation_policy) { ReservationPolicy.create!(capacity: 2, user: admin_user) }
+
+    it "returns the capacity if there are no reservations made" do
+      number_of_reservations = 0
+
+      spots = reservation_policy.spots_remaining(number_of_reservations)
+
+      expect(spots).to be 2
+    end
+
+    it "returns remaining spots if reservations have been made" do
+      number_of_reservations = 1
+
+      spots = reservation_policy.spots_remaining(number_of_reservations)
+
+      expect(spots).to be 1
+    end
+
+    it "returns zero if there are no spots remaining" do
+      number_of_reservations = 2
+
+      spots = reservation_policy.spots_remaining(number_of_reservations)
+
+      expect(spots).to be 0
+    end
+
+    it "returns zero if there are more reservations than the policy allows for" do
+      number_of_reservations = 5
+
+      spots = reservation_policy.spots_remaining(number_of_reservations)
+
+      expect(spots).to be 0
+    end
+  end
 end
