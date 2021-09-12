@@ -4,7 +4,7 @@ class ReservationService
   end
 
   def self.spots_used_today
-    Reservation.where(date: Date.today).count
+    for_date(Date.today).count
   end
 
   def self.for_date(date)
