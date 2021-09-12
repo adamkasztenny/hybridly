@@ -56,16 +56,14 @@ RSpec.describe ReservationPolicy, type: :model do
   end
 
   context ".exceeds_capacity?" do
-    before do
-      ReservationPolicy.create!(capacity: 10, user: admin_user)
-    end
+    let!(:reservation_policy) { ReservationPolicy.create!(capacity: 10, user: admin_user) }
 
     it "returns true if the number of reservations exceed the current capacity" do
-      expect(ReservationPolicy.exceeds_capacity?(50)).to be true
+      expect(reservation_policy.exceeds_capacity?(50)).to be true
     end
 
     it "returns false if the number of reservations does not exceed the current capacity" do
-      expect(ReservationPolicy.exceeds_capacity?(1)).to be false
+      expect(reservation_policy.exceeds_capacity?(1)).to be false
     end
   end
 
