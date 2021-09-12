@@ -29,7 +29,7 @@ class ReservationsController < ApplicationController
 
   def show_for_date
     @date = params[:date]
-    @reservations = Reservation.for_date(@date)
+    @reservations = ReservationService.for_date(@date)
   end
 
   def verify
