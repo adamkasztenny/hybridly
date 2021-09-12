@@ -14,6 +14,10 @@ class ReservationPolicy < ApplicationRecord
     self.current.capacity < number_of_reservations
   end
 
+  def spots_remaining(number_of_reservations)
+    [0, capacity - number_of_reservations].max
+  end
+
   private
 
   def user_must_be_an_admin
