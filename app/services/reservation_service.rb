@@ -3,12 +3,6 @@ class ReservationService
     Reservation.group(:date).count(:date)
   end
 
-  def self.spots_remaining_for_today
-    used_spots = Reservation.where(date: Date.today).count
-    capacity = ReservationPolicy.current.capacity
-    capacity - used_spots
-  end
-
   def self.spots_used_today
     Reservation.where(date: Date.today).count
   end
