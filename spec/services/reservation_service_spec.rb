@@ -66,6 +66,33 @@ RSpec.describe ReservationService do
     end
   end
 
+  context ".spots_used_today" do
+    before do
+      Timecop.freeze(DateTime.new(2022, 1, 1, 13, 25))
+    end
+
+    after do
+      Timecop.return
+    end
+
+    it "returns zero if there are no reservations for a particular day" do
+      spots_used_today = ReservationService.spots_used_today
+
+      expect(spots_used_today).to be 0
+    end
+
+    it "returns a list of reservations for a particular day" do
+      first_resevation = Reservation.create!(date: Date.new(2022, 1, 1), user: user,
+                                             verification_code: SecureRandom.uuid)
+      second_reservation = Reservation.create!(date: Date.new(2022, 1, 1), user: second_user,
+                                               verification_code: SecureRandom.uuid)
+
+      spots_used_today = ReservationService.spots_used_today
+
+      expect(spots_used_today).to be 2
+    end
+  end
+
   context ".for_date" do
     it "returns an empty list if there are no reservations for a particular day" do
       reservations = ReservationService.for_date(Date.new(2022, 1, 1))

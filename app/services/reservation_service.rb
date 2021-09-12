@@ -9,6 +9,10 @@ class ReservationService
     capacity - used_spots
   end
 
+  def self.spots_used_today
+    Reservation.where(date: Date.today).count
+  end
+
   def self.for_date(date)
     Reservation.where(date: date)
   end
