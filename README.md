@@ -1,5 +1,7 @@
 # Hybridly
 
+[![Coverage Status](https://coveralls.io/repos/github/adamkasztenny/hybridly/badge.svg?branch=main)](https://coveralls.io/github/adamkasztenny/hybridly?branch=main)
+
 An open source hybrid work solution :office:
 
 ## :star: Features :star:
