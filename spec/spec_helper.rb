@@ -1,5 +1,16 @@
 require 'simplecov'
-SimpleCov.start 'rails'
+require 'simplecov-lcov'
+
+SimpleCov.start 'rails' do
+    SimpleCov::Formatter::LcovFormatter.config do |c|
+      c.report_with_single_file = true
+      c.single_report_path = 'coverage/lcov.info'
+
+      formatter SimpleCov::Formatter::LcovFormatter
+
+      add_filter %w[version.rb initializer.rb]
+    end
+end
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
