@@ -52,6 +52,7 @@ group :test do
   gem 'webdrivers'
 
   gem 'simplecov'
+  gem 'simplecov-lcov', '~> 0.8.0'
 
   gem 'timecop'
 end
