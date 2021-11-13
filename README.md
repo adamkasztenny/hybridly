@@ -1,6 +1,6 @@
 # Hybridly
 
-[![Coverage Status](https://coveralls.io/repos/github/adamkasztenny/hybridly/badge.svg?branch=main)](https://coveralls.io/github/adamkasztenny/hybridly?branch=main)
+[![Workflow](https://github.com/adamkasztenny/hybridly/actions/workflows/ruby.yml/badge.svg)](https://github.com/adamkasztenny/hybridly/actions/workflows/ruby.yml)[![Coverage Status](https://coveralls.io/repos/github/adamkasztenny/hybridly/badge.svg?branch=main)](https://coveralls.io/github/adamkasztenny/hybridly?branch=main)
 
 An open source hybrid work solution :office:
 
