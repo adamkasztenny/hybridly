@@ -15,6 +15,11 @@ module Types
       description "Returns the number of reservations made per day"
     end
 
+    field :reservations, [ReservationType], null: true do
+      description "Returns the reservations made that day"
+      argument :date, GraphQL::Types::ISO8601Date, required: true
+    end
+
     def workspaces
       Workspace.all
     end
@@ -26,6 +31,15 @@ module Types
     def reservations_per_day
       ReservationService.reservations_per_day.map do |date, number_of_reservations|
         { :date => date, :number_of_reservations => number_of_reservations }
+      end
+    end
+
+    def reservations(arguments)
+      ReservationService.for_date(arguments[:date]).map do |reservation|
+        reservation_hash = reservation.as_json
+        reservation_hash[:user] = reservation.user.email
+        reservation_hash[:workspace] = reservation.workspace.as_json
+        reservation_hash
       end
     end
   end
