@@ -36,10 +36,10 @@ RSpec.describe "Reservations Query" do
 
     expect(result).to eq({ "reservations" => [{ "date" => "2022-01-03", "user" => first_reservation.user.email,
                                                 "workspace" => { "location" => "Engineering",
-                                                                 "capacity" => 1, "workspaceType" => "desks" } },
+                                                                 "capacity" => 1, "workspaceType" => "DESKS" } },
                                               { "date" => "2022-01-03", "user" => "other-user@example.com",
                                                 "workspace" => { "location" => "Server Closet",
-                                                                 "capacity" => 2, "workspaceType" => "desks" } }] })
+                                                                 "capacity" => 2, "workspaceType" => "DESKS" } }] })
   end
 
   private

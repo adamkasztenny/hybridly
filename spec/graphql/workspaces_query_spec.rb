@@ -16,8 +16,8 @@ RSpec.describe "Workspaces Query" do
 
     expect(result).to eq({ "workspaces" => [
                            { "capacity" => 1, "location" => "Engineering",
-                             "workspaceType" => "desks" },
-                           { "capacity" => 1, "location" => "Office", "workspaceType" => "meeting_room" }
+                             "workspaceType" => "DESKS" },
+                           { "capacity" => 1, "location" => "Office", "workspaceType" => "MEETING_ROOM" }
                          ] })
   end
 
