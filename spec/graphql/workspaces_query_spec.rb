@@ -15,9 +15,9 @@ RSpec.describe "Workspaces Query" do
     result = execute_workspaces_query
 
     expect(result).to eq({ "workspaces" => [
-                           { "capacity" => 1, "id" => "1", "location" => "Engineering",
+                           { "capacity" => 1, "location" => "Engineering",
                              "workspaceType" => "desks" },
-                           { "capacity" => 1, "id" => "2", "location" => "Office", "workspaceType" => "meeting_room" }
+                           { "capacity" => 1, "location" => "Office", "workspaceType" => "meeting_room" }
                          ] })
   end
 
@@ -27,7 +27,6 @@ RSpec.describe "Workspaces Query" do
     query_string = "
     {
       workspaces {
-        id
         location
         capacity
         workspaceType
