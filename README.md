@@ -38,6 +38,7 @@ Open [localhost:3000](http://localhost:3000) in your browser to use Hybridly!
 
 ## Local Development
 In addition to the tools above, you will also need Node and Yarn installed for local development.
+[asdf](https://asdf-vm.com/) can be used to manage tool versions.
 
 To start the development server, the steps are the same as above, except run
 `make start_development` instead of `make start`, and run `make seed` instead
